@@ -50,3 +50,45 @@ export async function getLiveMarketData() {
   
   return [...results, ...remainingMocks];
 }
+
+export async function getStockTimeSeries(symbol: string, interval: string = '5min') {
+  try {
+    const response = await fetch(
+      `${BASE_URL}?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=${interval}&apikey=${API_KEY}`,
+      { next: { revalidate: 300 } } // Cache 5 minutes
+    );
+    const data = await response.json();
+
+    if (data["Information"] || data["Note"]) {
+      console.warn(`[API LIMIT] Alpha Vantage limit reached for ${symbol}.`);
+      throw new Error("Rate limit exceeded");
+    }
+
+    const timeSeries = data[`Time Series (${interval})`];
+    if (!timeSeries) {
+      throw new Error("No data available");
+    }
+
+    // Convert to candlestick format
+    const formattedData = Object.entries(timeSeries)
+      .slice(0, 100) // Last 100 data points
+      .map(([timestamp, values]: [string, any]) => ({
+        time: Math.floor(new Date(timestamp).getTime() / 1000) as any,
+        open: parseFloat(values["1. open"]),
+        high: parseFloat(values["2. high"]),
+        low: parseFloat(values["3. low"]),
+        close: parseFloat(values["4. close"]),
+      }))
+      .reverse(); // Reverse to chronological order
+
+    return formattedData;
+  } catch (error) {
+    console.error(`Failed to fetch stock data for ${symbol}:`, error);
+    // Return mock data for demo
+    return [
+      { time: Math.floor(Date.now() / 1000) - 3600, open: 200, high: 205, low: 195, close: 202 },
+      { time: Math.floor(Date.now() / 1000) - 1800, open: 202, high: 208, low: 200, close: 206 },
+      { time: Math.floor(Date.now() / 1000), open: 206, high: 210, low: 204, close: 208 },
+    ];
+  }
+}
