@@ -1,5 +1,5 @@
 import { createOpenAI } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { generateText } from 'ai';
 
 const openrouter = createOpenAI({
   apiKey: process.env.OPENROUTER_API_KEY || '',
@@ -41,16 +41,16 @@ Use the data above as your primary reference if the user asks about current mark
     console.log("[LOG-2] DISPATCHING REQUEST TO OPENROUTER...");
     console.log("Target Model: anthropic/claude-3-haiku:beta");
 
-    const result = await streamText({
-      model: openrouter('anthropic/claude-3-haiku:beta'),
+    const result = await generateText({
+      model: openrouter('anthropic/claude-3-haiku'),
       system: SYSTEM_PROMPT,
       prompt,
     });
 
     // --- LOGGING 3: SUCCESS ---
-    console.log("[LOG-3] OPENROUTER CONNECTION SUCCESSFUL. STREAMING STARTED...\n");
+    console.log("[LOG-3] OPENROUTER CONNECTION SUCCESSFUL. RESPONSE GENERATED...\n");
 
-    return result.toTextStreamResponse();
+    return new Response(result.text);
   } catch (error) {
     // --- LOGGING 4: FATAL ERROR TRACE ---
     console.error("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
