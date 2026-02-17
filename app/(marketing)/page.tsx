@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { Activity, Zap, Terminal, Globe, Shield, ChevronsRight, ArrowRight, Bot, LineChart, Cpu } from "lucide-react";
+import { Activity, Zap, Terminal, Globe, Shield, ChevronsRight, ArrowRight, Bot, LineChart, Cpu, Github } from "lucide-react";
 
 export default function LandingPage() {
   return (
@@ -22,6 +22,14 @@ export default function LandingPage() {
           <div className="flex items-center gap-6 text-sm font-medium">
              <Link href="#features" className="text-zinc-500 hover:text-white transition-colors">FEATURES</Link>
              <Link href="#bot" className="text-zinc-500 hover:text-red-500 transition-colors uppercase">C.F.A</Link>
+             <a 
+               href="https://github.com/decimasudo/quant-terminal" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-zinc-500 hover:text-orange-500 transition-colors"
+             >
+               <Github size={20} />
+             </a>
              <Link 
                href="/terminal" 
                className="bg-orange-600 hover:bg-orange-500 text-black px-4 py-2 font-bold flex items-center gap-2 transition-all hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"

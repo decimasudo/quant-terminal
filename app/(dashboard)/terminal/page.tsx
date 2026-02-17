@@ -7,7 +7,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import { Activity, ChevronDown, MessageSquare, Newspaper, Send, Zap, Plus, X, LineChart } from "lucide-react"
+import { Activity, ChevronDown, MessageSquare, Newspaper, Send, Zap, Plus, X, LineChart, Github } from "lucide-react"
 import { createChart, ColorType, CrosshairMode, CandlestickSeries, UTCTimestamp } from "lightweight-charts"
 
 const klineCache: Record<string, any[]> = {}
@@ -489,6 +489,11 @@ export default function TerminalPage() {
         </div>
         
         <div className="flex items-center gap-4">
+           {/* GitHub Link */}
+           <a href="https://github.com/decimasudo/quant-terminal" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-orange-500 transition-colors">
+             <Github size={20} />
+           </a>
+           
            {/* Connection Status */}
            <div className="flex items-center gap-2 px-3 py-1 bg-[#111] border border-[#333] rounded text-xs">
               <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
