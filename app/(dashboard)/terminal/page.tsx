@@ -371,7 +371,9 @@ export default function TerminalPage() {
       {/* TOP NAVBAR */}
       <div className="h-10 border-b border-[#1e2329] bg-[#0b0e11] flex items-center justify-between px-2 shrink-0">
         <div className="flex items-center gap-4">
-          <img src="/logo.jpeg" alt="Logo" className="h-32 w-auto object-contain" />
+          <span className="text-white font-bold flex items-center gap-2 tracking-widest leading-none">
+            <Activity size={14} className="text-[#f59e0b]" /> CLAY FINANCIAL AGENT
+          </span>
           <div className="flex gap-4 text-[#848e9c] ml-6 text-xs">
             <span onClick={() => setMainMenu('trading')} className={`cursor-pointer transition-colors ${mainMenu === 'trading' ? 'text-[#f59e0b] font-bold' : 'hover:text-white'}`}>Macro & Crypto Analysis</span>
             <span onClick={() => setMainMenu('news')} className={`cursor-pointer transition-colors ${mainMenu === 'news' ? 'text-[#f59e0b] font-bold' : 'hover:text-white'}`}>Global Market News</span>
@@ -391,45 +393,38 @@ export default function TerminalPage() {
             </h1>
             <p className="text-[#848e9c] mb-8 text-sm">Real-time analysis of psychological indicators and market positioning.</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {/* Crypto Fear & Greed */}
-              <div className="bg-[#12161a] border border-[#1e2329] p-6 rounded-lg flex flex-col items-center text-center">
-                <span className="text-xs font-bold text-[#848e9c] mb-4 tracking-widest uppercase">Crypto Fear & Greed Index</span>
-                <div className="relative w-48 h-24 mb-6">
-                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-zinc-800 rounded-t-full"></div>
-                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-green-500 rounded-t-full" style={{ clipPath: 'polygon(0 0, 75% 0, 75% 100%, 0 100%)' }}></div>
+            <div className="mb-8">
+              {/* Aggregated Fear & Greed */}
+              <div className="bg-[#12161a] border border-[#1e2329] p-8 rounded-lg flex flex-col items-center text-center max-w-2xl mx-auto shadow-2xl">
+                <span className="text-xs font-bold text-[#f59e0b] mb-6 tracking-widest uppercase">Aggregated Market Sentiment Index</span>
+                <div className="relative w-64 h-32 mb-10">
+                  <div className="absolute inset-0 border-t-[16px] border-l-[16px] border-r-[16px] border-zinc-800 rounded-t-full"></div>
+                  {/* Gauge indicator: 55% coverage */}
+                  <div className="absolute inset-0 border-t-[16px] border-l-[16px] border-r-[16px] border-[#f59e0b] rounded-t-full" style={{ clipPath: 'polygon(0 0, 55% 0, 55% 100%, 0 100%)' }}></div>
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                    <span className="text-4xl font-black text-white">74</span>
-                    <span className="text-sm font-bold text-green-500 uppercase tracking-tighter">Greed</span>
+                    <span className="text-6xl font-black text-white">55</span>
+                    <span className="text-sm font-bold text-[#f59e0b] uppercase tracking-widest mt-1">Neutral</span>
                   </div>
                 </div>
-                <div className="w-full space-y-3 pt-4 border-t border-[#1e2329]">
-                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Yesterday</span><span className="text-white">70 (Greed)</span></div>
-                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Last Week</span><span className="text-white">65 (Greed)</span></div>
-                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Last Month</span><span className="text-white">48 (Neutral)</span></div>
-                </div>
-              </div>
-
-              {/* Equity Fear & Greed */}
-              <div className="bg-[#12161a] border border-[#1e2329] p-6 rounded-lg flex flex-col items-center text-center">
-                <span className="text-xs font-bold text-[#848e9c] mb-4 tracking-widest uppercase">Stock Market Sentiment (CNN)</span>
-                <div className="relative w-48 h-24 mb-6">
-                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-zinc-800 rounded-t-full"></div>
-                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-orange-500 rounded-t-full" style={{ clipPath: 'polygon(0 0, 35% 0, 35% 100%, 0 100%)' }}></div>
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                    <span className="text-4xl font-black text-white">35</span>
-                    <span className="text-sm font-bold text-orange-500 uppercase tracking-tighter">Fear</span>
+                
+                <div className="w-full grid grid-cols-3 gap-4 pt-8 border-t border-[#1e2329]">
+                  <div className="flex flex-col gap-1 italic border-r border-[#1e2329]">
+                    <span className="text-[#848e9c] text-[10px] uppercase">Crypto Base</span>
+                    <span className="text-green-500 font-bold">74 (Greed)</span>
                   </div>
-                </div>
-                <div className="w-full space-y-3 pt-4 border-t border-[#1e2329]">
-                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Market Momentum</span><span className="text-red-400">Extreme Fear</span></div>
-                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Stock Price Strength</span><span className="text-orange-400">Fear</span></div>
-                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Safe Haven Demand</span><span className="text-green-400">Extreme Greed</span></div>
+                  <div className="flex flex-col gap-1 italic border-r border-[#1e2329]">
+                    <span className="text-[#848e9c] text-[10px] uppercase">Equity Base</span>
+                    <span className="text-orange-500 font-bold">35 (Fear)</span>
+                  </div>
+                  <div className="flex flex-col gap-1 italic">
+                    <span className="text-[#848e9c] text-[10px] uppercase">VIX Status</span>
+                    <span className="text-red-400 font-bold">High Vol</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#12161a] border-l-4 border-[#f59e0b] p-6 mb-8">
+            <div className="bg-[#12161a] border-l-4 border-[#f59e0b] p-6 mb-8 max-w-2xl mx-auto">
               <h2 className="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase">
                 <Zap size={16} className="text-[#f59e0b]"/> Daily Sentiment Summary
               </h2>
