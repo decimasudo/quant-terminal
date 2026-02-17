@@ -369,14 +369,13 @@ export default function TerminalPage() {
     <div className="h-screen w-full bg-[#0b0e11] text-[#848e9c] font-mono overflow-hidden flex flex-col text-[11px] leading-tight select-none">
       
       {/* TOP NAVBAR */}
-      <div className="h-8 border-b border-[#1e2329] bg-[#0b0e11] flex items-center justify-between px-2 shrink-0">
+      <div className="h-10 border-b border-[#1e2329] bg-[#0b0e11] flex items-center justify-between px-2 shrink-0">
         <div className="flex items-center gap-4">
-          <span className="text-white font-bold flex items-center gap-2 tracking-widest">
-            <Activity size={14} className="text-[#f59e0b]" /> CLAY FINANCIAL AGENT
-          </span>
+          <img src="/logo.jpeg" alt="Logo" className="h-32 w-auto object-contain" />
           <div className="flex gap-4 text-[#848e9c] ml-6 text-xs">
             <span onClick={() => setMainMenu('trading')} className={`cursor-pointer transition-colors ${mainMenu === 'trading' ? 'text-[#f59e0b] font-bold' : 'hover:text-white'}`}>Macro & Crypto Analysis</span>
             <span onClick={() => setMainMenu('news')} className={`cursor-pointer transition-colors ${mainMenu === 'news' ? 'text-[#f59e0b] font-bold' : 'hover:text-white'}`}>Global Market News</span>
+            <span onClick={() => setMainMenu('fng')} className={`cursor-pointer transition-colors ${mainMenu === 'fng' ? 'text-[#f59e0b] font-bold' : 'hover:text-white'}`}>Fear & Greed Index</span>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -384,7 +383,75 @@ export default function TerminalPage() {
         </div>
       </div>
 
-      {mainMenu === 'news' ? (
+      {mainMenu === 'fng' ? (
+        <div className="flex-1 overflow-y-auto bg-[#0b0e11] p-6 no-scrollbar">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+              <Activity className="text-[#f59e0b]"/> MARKET SENTIMENT DASHBOARD
+            </h1>
+            <p className="text-[#848e9c] mb-8 text-sm">Real-time analysis of psychological indicators and market positioning.</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {/* Crypto Fear & Greed */}
+              <div className="bg-[#12161a] border border-[#1e2329] p-6 rounded-lg flex flex-col items-center text-center">
+                <span className="text-xs font-bold text-[#848e9c] mb-4 tracking-widest uppercase">Crypto Fear & Greed Index</span>
+                <div className="relative w-48 h-24 mb-6">
+                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-zinc-800 rounded-t-full"></div>
+                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-green-500 rounded-t-full" style={{ clipPath: 'polygon(0 0, 75% 0, 75% 100%, 0 100%)' }}></div>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <span className="text-4xl font-black text-white">74</span>
+                    <span className="text-sm font-bold text-green-500 uppercase tracking-tighter">Greed</span>
+                  </div>
+                </div>
+                <div className="w-full space-y-3 pt-4 border-t border-[#1e2329]">
+                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Yesterday</span><span className="text-white">70 (Greed)</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Last Week</span><span className="text-white">65 (Greed)</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Last Month</span><span className="text-white">48 (Neutral)</span></div>
+                </div>
+              </div>
+
+              {/* Equity Fear & Greed */}
+              <div className="bg-[#12161a] border border-[#1e2329] p-6 rounded-lg flex flex-col items-center text-center">
+                <span className="text-xs font-bold text-[#848e9c] mb-4 tracking-widest uppercase">Stock Market Sentiment (CNN)</span>
+                <div className="relative w-48 h-24 mb-6">
+                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-zinc-800 rounded-t-full"></div>
+                  <div className="absolute inset-0 border-t-[12px] border-l-[12px] border-r-[12px] border-orange-500 rounded-t-full" style={{ clipPath: 'polygon(0 0, 35% 0, 35% 100%, 0 100%)' }}></div>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <span className="text-4xl font-black text-white">35</span>
+                    <span className="text-sm font-bold text-orange-500 uppercase tracking-tighter">Fear</span>
+                  </div>
+                </div>
+                <div className="w-full space-y-3 pt-4 border-t border-[#1e2329]">
+                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Market Momentum</span><span className="text-red-400">Extreme Fear</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Stock Price Strength</span><span className="text-orange-400">Fear</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-[#848e9c]">Safe Haven Demand</span><span className="text-green-400">Extreme Greed</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#12161a] border-l-4 border-[#f59e0b] p-6 mb-8">
+              <h2 className="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase">
+                <Zap size={16} className="text-[#f59e0b]"/> Daily Sentiment Summary
+              </h2>
+              <div className="text-[#848e9c] leading-relaxed space-y-4 text-xs">
+                <p>
+                  Pasar menunjukkan divergensi yang signifikan hari ini. Sementara <strong className="text-white">Crypto Fear & Greed Index</strong> berada di angka <span className="text-green-500">74 (Greed)</span> didorong oleh arus masuk ETF dan akumulasi institusional, pasar ekuitas tradisional justru menunjukkan tanda-tanda kecemasan.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-[#0b0e11] p-3 border border-[#1e2329]">
+                    <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter">Crypto Outlook</h3>
+                    <p className="opacity-80">Sentimen tetap bullish namun mendekati zona "Extreme Greed". Secara historis, ini sering mendahului konsolidasi harga singkat sebelum melanjutkan tren naik.</p>
+                  </div>
+                  <div className="bg-[#0b0e11] p-3 border border-[#1e2329]">
+                    <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter">Equity Outlook</h3>
+                    <p className="opacity-80">Indeks CNN bergeser ke arah "Fear". Investor mulai berpindah ke safe-haven assets seperti Gold dan Treasury Bond di tengah ketidakpastian data inflasi mendatang.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : mainMenu === 'news' ? (
         <div className="flex-1 overflow-y-auto bg-[#0b0e11] p-6 no-scrollbar">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2"><Newspaper className="text-[#f59e0b]"/> GLOBAL MARKET NEWS</h1>
