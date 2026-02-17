@@ -41,7 +41,24 @@ function TradingChart({ symbol, timeframe, isMock }: { symbol: string, timeframe
     // JIKA ASET TRADISIONAL (SAHAM/EMAS): Gunakan Simulation Engine agar chart selalu kaya & penuh
     if (isMock) {
       const cleanSymbol = symbol.replace('USDT', '');
-      let basePrice = cleanSymbol === 'XAU' ? 2024.50 : cleanSymbol === 'SPX' ? 5005.10 : cleanSymbol === 'AAPL' ? 182.50 : cleanSymbol === 'MSFT' ? 406.30 : 200.00;
+      
+      // Mengambil base price dari data awal agar sinkron
+      const initialPrices: Record<string, number> = {
+        'XAU': 2024.50, 'SPX': 5005.10, 'NVDA': 875.28, 'AAPL': 173.50, 'MSFT': 420.55,
+        'AMZN': 178.15, 'WMT': 60.55, 'JPM': 195.30, 'V': 280.15, 'JNJ': 158.40,
+        'HD': 350.20, 'PG': 160.80, 'CVX': 155.30, 'META': 505.10, 'LLY': 760.40,
+        'UNH': 490.15, 'MA': 475.20, 'XOM': 115.40, 'ABBV': 178.60, 'MRK': 125.10,
+        'AVGO': 1350.20, 'KO': 60.15, 'PEP': 170.40, 'MCD': 285.20, 'COST': 740.15,
+        'ORCL': 125.40, 'TMO': 580.20, 'CSCO': 48.55, 'NKE': 100.20, 'CRM': 305.40,
+        'INTC': 42.15, 'BA': 200.55, 'TSLA': 175.22,
+        'BTC': 52000, 'ETH': 3000, 'USDT': 1.00, 'XRP': 0.55, 'BNB': 380, 'USDC': 1.00,
+        'SOL': 110, 'TRX': 0.12, 'DOGE': 0.08, 'BCH': 280, 'ADA': 0.60, 'HYPE': 10.50,
+        'LEO': 4.20, 'LINK': 18.50, 'eUSDe': 1.00, 'XMR': 150, 'CC': 50, 'XLM': 0.12,
+        'DAI': 1.00, 'USD1': 1.00, 'ZEC': 30, 'HBAR': 0.08, 'LTC': 70, 'PYUSD': 1.00,
+        'AVAX': 40, 'SHIB': 0.000009, 'SUI': 1.80, 'TON': 2.20, 'CRO': 0.09, 'WLFIw': 0.50
+      };
+
+      let basePrice = initialPrices[cleanSymbol] || 200.00;
       let time = Math.floor(Date.now() / 1000) - (200 * 3600); 
       
       const fakeData: any[] = [];
@@ -133,17 +150,72 @@ export default function TerminalPage() {
   
   const [newSymbolInput, setNewSymbolInput] = useState("")
   const [watchlist, setWatchlist] = useState([
+    // CRYPTOCURRENCY (LIVE VIA WEBSOCKET)
     { sym: "BTC", name: "Bitcoin", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
     { sym: "ETH", name: "Ethereum", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "USDT", name: "Tether", price: "$1.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "XRP", name: "XRP", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "BNB", name: "BNB", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "USDC", name: "USD Coin", price: "$1.00", chg: "0.00%", isUp: true, isMock: false },
     { sym: "SOL", name: "Solana", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
-    { sym: "XRP", name: "Ripple", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "TRX", name: "TRON", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "DOGE", name: "Dogecoin", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "BCH", name: "Bitcoin Cash", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "ADA", name: "Cardano", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "HYPE", name: "Hyperliquid", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "LEO", name: "UNUS SED LEO", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "LINK", name: "Chainlink", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "eUSDe", name: "Ethena USDe", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "XMR", name: "Monero", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "CC", name: "Canton", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "XLM", name: "Stellar", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "DAI", name: "Dai", price: "$1.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "USD1", name: "World Liberty Financial USD", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "ZEC", name: "Zcash", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "HBAR", name: "Hedera", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "LTC", name: "Litecoin", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "PYUSD", name: "PayPal USD", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "AVAX", name: "Avalanche", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "SHIB", name: "Shiba Inu", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "SUI", name: "Sui", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "TON", name: "Toncoin", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "CRO", name: "Cronos", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+    { sym: "WLFIw", name: "World Liberty Financial", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
     { sym: "DOT", name: "Polkadot", price: "$0.00", chg: "0.00%", isUp: true, isMock: false },
+
     // ASET TRADISIONAL (MOCKS - Agar selalu hidup dan kaya data)
     { sym: "XAU", name: "Gold Spot", price: "$2,024.50", chg: "+0.15%", isUp: true, isMock: true },
     { sym: "SPX", name: "S&P 500 Index", price: "$5,005.10", chg: "+1.20%", isUp: true, isMock: true },
-    { sym: "AAPL", name: "Apple Inc.", price: "$182.52", chg: "+1.24%", isUp: true, isMock: true },
-    { sym: "MSFT", name: "Microsoft", price: "$406.32", chg: "+0.85%", isUp: true, isMock: true },
-    { sym: "TSLA", name: "Tesla Inc.", price: "$200.45", chg: "-2.10%", isUp: false, isMock: true },
+    { sym: "NVDA", name: "NVIDIA Corporation", price: "$875.28", chg: "+0.58%", isUp: true, isMock: true },
+    { sym: "AAPL", name: "Apple Inc.", price: "$173.50", chg: "+1.24%", isUp: true, isMock: true },
+    { sym: "MSFT", name: "Microsoft Corporation", price: "$420.55", chg: "+0.89%", isUp: true, isMock: true },
+    { sym: "AMZN", name: "Amazon.com, Inc.", price: "$178.15", chg: "-1.10%", isUp: false, isMock: true },
+    { sym: "WMT", name: "Walmart Inc.", price: "$60.55", chg: "+0.45%", isUp: true, isMock: true },
+    { sym: "JPM", name: "JPMorgan Chase & Co.", price: "$195.30", chg: "+1.15%", isUp: true, isMock: true },
+    { sym: "V", name: "Visa Inc.", price: "$280.15", chg: "+0.32%", isUp: true, isMock: true },
+    { sym: "JNJ", name: "Johnson & Johnson", price: "$158.40", chg: "-0.25%", isUp: false, isMock: true },
+    { sym: "HD", name: "The Home Depot, Inc.", price: "$350.20", chg: "+0.78%", isUp: true, isMock: true },
+    { sym: "PG", name: "The Procter & Gamble Company", price: "$160.80", chg: "+0.55%", isUp: true, isMock: true },
+    { sym: "CVX", name: "Chevron Corporation", price: "$155.30", chg: "-0.45%", isUp: false, isMock: true },
+    { sym: "META", name: "Meta Platforms, Inc.", price: "$505.10", chg: "+0.45%", isUp: true, isMock: true },
+    { sym: "LLY", name: "Eli Lilly and Company", price: "$760.40", chg: "+1.20%", isUp: true, isMock: true },
+    { sym: "UNH", name: "UnitedHealth Group Incorporated", price: "$490.15", chg: "-0.65%", isUp: false, isMock: true },
+    { sym: "MA", name: "Mastercard Incorporated", price: "$475.20", chg: "+0.42%", isUp: true, isMock: true },
+    { sym: "XOM", name: "Exxon Mobil Corporation", price: "$115.40", chg: "+0.85%", isUp: true, isMock: true },
+    { sym: "ABBV", name: "AbbVie Inc.", price: "$178.60", chg: "+0.25%", isUp: true, isMock: true },
+    { sym: "MRK", name: "Merck & Co., Inc.", price: "$125.10", chg: "+0.15%", isUp: true, isMock: true },
+    { sym: "AVGO", name: "Broadcom Inc.", price: "$1,350.20", chg: "+2.10%", isUp: true, isMock: true },
+    { sym: "KO", name: "Coca-Cola Company", price: "$60.15", chg: "-0.10%", isUp: false, isMock: true },
+    { sym: "PEP", name: "PepsiCo, Inc.", price: "$170.40", chg: "-0.35%", isUp: false, isMock: true },
+    { sym: "MCD", name: "McDonald's Corporation", price: "$285.20", chg: "+0.52%", isUp: true, isMock: true },
+    { sym: "COST", name: "Costco Wholesale Corporation", price: "$740.15", chg: "+0.88%", isUp: true, isMock: true },
+    { sym: "ORCL", name: "Oracle Corporation", price: "$125.40", chg: "+1.45%", isUp: true, isMock: true },
+    { sym: "TMO", name: "Thermo Fisher Scientific Inc.", price: "$580.20", chg: "+0.35%", isUp: true, isMock: true },
+    { sym: "CSCO", name: "Cisco Systems, Inc.", price: "$48.55", chg: "-1.20%", isUp: false, isMock: true },
+    { sym: "NKE", name: "Nike, Inc.", price: "$100.20", chg: "-0.75%", isUp: false, isMock: true },
+    { sym: "CRM", name: "Salesforce, Inc.", price: "$305.40", chg: "+1.10%", isUp: true, isMock: true },
+    { sym: "INTC", name: "Intel Corporation", price: "$42.15", chg: "-2.30%", isUp: false, isMock: true },
+    { sym: "BA", name: "Boeing Company", price: "$200.55", chg: "-1.45%", isUp: false, isMock: true },
   ])
 
   const [topTicker, setTopTicker] = useState({
@@ -300,7 +372,7 @@ export default function TerminalPage() {
       <div className="h-8 border-b border-[#1e2329] bg-[#0b0e11] flex items-center justify-between px-2 shrink-0">
         <div className="flex items-center gap-4">
           <span className="text-white font-bold flex items-center gap-2 tracking-widest">
-            <Activity size={14} className="text-[#f59e0b]" /> FINCEPT QUANT
+            <Activity size={14} className="text-[#f59e0b]" /> CLAY FINANCIAL AGENT
           </span>
           <div className="flex gap-4 text-[#848e9c] ml-6 text-xs">
             <span onClick={() => setMainMenu('trading')} className={`cursor-pointer transition-colors ${mainMenu === 'trading' ? 'text-[#f59e0b] font-bold' : 'hover:text-white'}`}>Macro & Crypto Analysis</span>
@@ -338,14 +410,8 @@ export default function TerminalPage() {
           <div className="h-10 border-b border-[#1e2329] bg-[#12161a] flex items-center justify-between px-4 shrink-0">
             <div className="flex h-full items-center gap-6">
               <span className="flex items-center gap-2 text-[#f59e0b] font-bold tracking-wider">
-                <LineChart size={14} /> QUANTITATIVE TERMINAL
+                <LineChart size={14} /> CLAY FINANCIAL AGENT
               </span>
-              <div className="flex items-center gap-2 bg-[#1e2329] px-2 py-1 rounded">
-                <span className="text-white">MULTI-ASSET DATA FEED</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 text-xs">
-              <span className="text-green-500 flex items-center gap-1"><Activity size={12}/> DATA STREAM ONLINE</span>
             </div>
           </div>
 
@@ -379,19 +445,7 @@ export default function TerminalPage() {
                   <div className="px-4 py-2 text-[#f59e0b] border-b border-[#1e2329] font-bold bg-[#12161a]">
                     MACRO WATCHLIST
                   </div>
-                  <div className="p-2 border-b border-[#1e2329] bg-[#0b0e11]">
-                    <div className="bg-[#1e2329]/50 border border-[#3b4351] rounded flex items-center px-2 py-1 focus-within:border-[#f59e0b]">
-                       <Plus size={12} className="text-[#848e9c] mr-2"/>
-                       <input 
-                         type="text" 
-                         value={newSymbolInput}
-                         onChange={(e) => setNewSymbolInput(e.target.value)}
-                         onKeyDown={handleAddSymbol}
-                         placeholder="Add symbol (e.g. LINK)" 
-                         className="bg-transparent outline-none w-full text-white placeholder-[#5e6673] uppercase text-[10px]"
-                       />
-                    </div>
-                  </div>
+                  
                   <div className="flex justify-between px-4 py-2 text-[#848e9c] border-b border-[#1e2329] text-[10px]">
                     <span>SYMBOL</span><span>PRICE / 24H</span>
                   </div>
