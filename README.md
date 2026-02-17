@@ -6,9 +6,11 @@
 [![Core](https://img.shields.io/badge/Finch_Engine-ONLINE-red?style=for-the-badge)]()
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-Official Terminal: https://quant-terminal.app (Coming Soon)
+Official Terminal: www.clawfinancialagent.site/
 
 CA: [REDACTED_SYSTEM_ADDRESS]
+
+Twitter: https://x.com/clawfinancialai
 
 ## 📡 The Transmission
 
