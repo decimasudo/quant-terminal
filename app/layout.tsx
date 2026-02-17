@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+
+const shareTechMono = Share_Tech_Mono({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-share-tech",
+});
 
 export const metadata: Metadata = {
   title: "Quant Terminal | Powered by FinRobot",
@@ -14,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased bg-black text-white min-h-screen">
+      <body className={`${shareTechMono.variable} font-mono antialiased bg-black text-white min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

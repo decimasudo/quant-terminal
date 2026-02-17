@@ -22,18 +22,23 @@ function TradingChart({ symbol, timeframe, isMock }: { symbol: string, timeframe
     if (!chartContainerRef.current) return
 
     const chart = createChart(chartContainerRef.current, {
-      layout: { background: { type: ColorType.Solid, color: '#000000' }, textColor: '#4ade80' },
-      grid: { vertLines: { color: '#163a1a' }, horzLines: { color: '#163a1a' } },
+      layout: { 
+        background: { type: ColorType.Solid, color: '#000000' }, 
+        textColor: '#fb923c',
+        fontFamily: "'Share Tech Mono', monospace",
+        fontSize: 12
+      },
+      grid: { vertLines: { color: '#2a1b12' }, horzLines: { color: '#2a1b12' } },
       crosshair: { mode: CrosshairMode.Normal },
-      timeScale: { borderColor: '#163a1a', rightOffset: 5 },
-      rightPriceScale: { borderColor: '#163a1a' },
+      timeScale: { borderColor: '#2a1b12', rightOffset: 5 },
+      rightPriceScale: { borderColor: '#2a1b12' },
       autoSize: true, 
     })
 
     const candlestickSeries = chart.addSeries(CandlestickSeries, {
-      upColor: '#22c55e', downColor: '#ef4444', 
+      upColor: '#f97316', downColor: '#7f1d1d', 
       borderVisible: false, 
-      wickUpColor: '#22c55e', wickDownColor: '#ef4444'
+      wickUpColor: '#f97316', wickDownColor: '#7f1d1d'
     })
 
     const cacheKey = `${symbol}-${timeframe}`
@@ -445,11 +450,11 @@ export default function TerminalPage() {
   const formatTime = (unixTime: number) => new Date(unixTime * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
 
   const activeItemData = watchlist.find(w => w.sym === activeSymbol) || watchlist[0];
-  const activeColor = topTicker.isUp ? 'text-[#4ade80]' : 'text-[#ef4444]'; // text-green-400 / text-red-500
-  const activeGlow = topTicker.isUp ? 'bot-text-glow' : 'glow-red';
+  const activeColor = topTicker.isUp ? 'text-orange-400' : 'text-red-500'; // text-orange-400 / text-red-500
+  const activeGlow = topTicker.isUp ? 'bot-text-glow' : 'glow-amber';
 
   return (
-    <div className="h-screen w-full bg-black text-white font-mono overflow-hidden flex flex-col text-[11px] leading-tight select-none cyber-grid">
+    <div className="h-screen w-full bg-black text-white font-mono overflow-hidden flex flex-col text-sm leading-tight select-none cyber-grid">
       
       {/* TOP NAVBAR - GAMER STYLE */}
       <div className="h-12 border-b border-[#333] bg-[#050505] flex items-center justify-between px-4 shrink-0 shadow-lg z-20 relative">
@@ -459,12 +464,12 @@ export default function TerminalPage() {
                 <div className="w-8 h-8 rounded border border-zinc-800 flex items-center justify-center relative overflow-hidden">
                    <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black animate-ping"></div>
-                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black"></div>
+                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-orange-500 rounded-full border-2 border-black animate-ping"></div>
+                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-orange-500 rounded-full border-2 border-black"></div>
              </div>
              <div className="flex flex-col">
-                <span className="text-white font-black text-lg tracking-widest leading-none bot-text-glow font-mono uppercase">C.F.A<span className="text-green-500">_OPS</span></span>
-                <span className="text-[9px] text-green-500/80 tracking-[0.2em] font-bold">QUANT ASSISTANT V2.0</span>
+                <span className="text-white font-black text-lg tracking-widest leading-none bot-text-glow font-mono uppercase">C.F.A</span>
+                <span className="text-xs text-orange-500/80 tracking-[0.2em] font-bold">QUANT ASSISTANT V2.0</span>
              </div>
           </div>
           
@@ -475,7 +480,7 @@ export default function TerminalPage() {
               <button
                 key={menu.id} 
                 onClick={() => setMainMenu(menu.id)} 
-                className={`px-4 py-1.5 rounded transition-all font-bold tracking-wider text-[10px] ${mainMenu === menu.id ? 'bg-green-500 text-black shadow-[0_0_10px_rgba(34,197,94,0.6)]' : 'text-gray-500 hover:text-white hover:bg-[#222]'}`}
+                className={`px-4 py-1.5 rounded transition-all font-bold tracking-wider text-xs ${mainMenu === menu.id ? 'bg-orange-500 text-black shadow-[0_0_10px_rgba(249,115,22,0.6)]' : 'text-gray-500 hover:text-white hover:bg-[#222]'}`}
               >
                 {menu.label}
               </button>
@@ -485,15 +490,11 @@ export default function TerminalPage() {
         
         <div className="flex items-center gap-4">
            {/* Connection Status */}
-           <div className="flex items-center gap-2 px-3 py-1 bg-[#111] border border-[#333] rounded text-[10px]">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-green-500 font-bold">SYSTEM ONLINE</span>
+           <div className="flex items-center gap-2 px-3 py-1 bg-[#111] border border-[#333] rounded text-xs">
+              <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
+              <span className="text-orange-500 font-bold">SYSTEM ONLINE</span>
            </div>
-           
-           <div className="flex items-center gap-2">
-             <div className="w-8 h-8 bg-[#111] rounded border border-[#333] flex items-center justify-center text-purple-500 font-bold">TP</div>
-             <span className="text-gray-400 font-bold">_tilakpatel_</span>
-           </div>
+          
         </div>
       </div>
 
@@ -501,7 +502,7 @@ export default function TerminalPage() {
         <div className="flex-1 overflow-y-auto bg-black p-6 no-scrollbar cyber-grid">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-2xl font-black text-white mb-2 flex items-center gap-2 tracking-tighter">
-              <Activity className="text-green-500 bot-text-glow"/> MARKET SENTIMENT MATRIX
+              <Activity className="text-orange-500 bot-text-glow"/> MARKET SENTIMENT MATRIX
             </h1>
             <p className="text-gray-500 mb-8 text-sm font-mono uppercase tracking-wider">Real-time analysis of psychological indicators and market positioning.</p>
             
@@ -509,42 +510,42 @@ export default function TerminalPage() {
               {/* Aggregated Fear & Greed */}
               <div className="bg-[#050505] border border-[#333] p-8 relative flex flex-col items-center text-center max-w-2xl mx-auto shadow-[0_0_30px_rgba(0,255,0,0.05)] overflow-hidden group">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-green-500"></div>
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-green-500"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-green-500"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-green-500"></div>
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-orange-500"></div>
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-orange-500"></div>
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-orange-500"></div>
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-orange-500"></div>
                 
-                <span className="text-xs font-bold text-green-500 mb-6 tracking-[0.3em] uppercase z-10">Aggregated Market Sentiment Index</span>
+                <span className="text-xs font-bold text-orange-500 mb-6 tracking-[0.3em] uppercase z-10">Aggregated Market Sentiment Index</span>
                 <div className="relative w-64 h-32 mb-10 z-10">
                   <div className="absolute inset-0 border-t-[16px] border-l-[16px] border-r-[16px] border-[#111] rounded-t-full"></div>
                   {/* Gauge indicator: 55% coverage */}
-                  <div className="absolute inset-0 border-t-[16px] border-l-[16px] border-r-[16px] border-green-500 rounded-t-full bot-glow-green" style={{ clipPath: 'polygon(0 0, 55% 0, 55% 100%, 0 100%)' }}></div>
+                  <div className="absolute inset-0 border-t-[16px] border-l-[16px] border-r-[16px] border-orange-500 rounded-t-full bot-glow-green" style={{ clipPath: 'polygon(0 0, 55% 0, 55% 100%, 0 100%)' }}></div>
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
                     <span className="text-6xl font-black text-white bot-text-glow">55</span>
-                    <span className="text-sm font-bold text-green-500 uppercase tracking-widest mt-1">Neutral</span>
+                    <span className="text-sm font-bold text-orange-500 uppercase tracking-widest mt-1">Neutral</span>
                   </div>
                 </div>
                 
                 <div className="w-full grid grid-cols-3 gap-4 pt-8 border-t border-[#333] z-10">
                   <div className="flex flex-col gap-1 italic border-r border-[#333]">
-                    <span className="text-gray-500 text-[10px] uppercase tracking-wider">Crypto Base</span>
-                    <span className="text-green-400 font-bold font-mono">74 (Greed)</span>
+                    <span className="text-gray-500 text-xs uppercase tracking-wider">Crypto Base</span>
+                    <span className="text-orange-400 font-bold font-mono">74 (Greed)</span>
                   </div>
                   <div className="flex flex-col gap-1 italic border-r border-[#333]">
-                    <span className="text-gray-500 text-[10px] uppercase tracking-wider">Equity Base</span>
-                    <span className="text-red-400 font-bold font-mono">35 (Fear)</span>
+                    <span className="text-gray-500 text-xs uppercase tracking-wider">Equity Base</span>
+                    <span className="text-amber-400 font-bold font-mono">35 (Fear)</span>
                   </div>
                   <div className="flex flex-col gap-1 italic">
-                    <span className="text-gray-500 text-[10px] uppercase tracking-wider">VIX Status</span>
-                    <span className="text-red-500 font-bold font-mono animate-pulse">High Vol</span>
+                    <span className="text-gray-500 text-xs uppercase tracking-wider">VIX Status</span>
+                    <span className="text-amber-500 font-bold font-mono animate-pulse">High Vol</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#050505] border-l-4 border-green-500 p-6 mb-8 max-w-2xl mx-auto border border-[#333] relative">
+            <div className="bg-[#050505] border-l-4 border-orange-500 p-6 mb-8 max-w-2xl mx-auto border border-[#333] relative">
               <h2 className="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-                <Zap size={16} className="text-red-500"/> Daily Sentiment Summary
+                <Zap size={16} className="text-amber-500"/> Daily Sentiment Summary
               </h2>
               <div className="text-gray-400 leading-relaxed space-y-4 text-xs font-mono">
                 {isFngLoading ? (
@@ -562,15 +563,15 @@ export default function TerminalPage() {
                       {fngSummary?.intro || "Fetching market psychology analysis..."}
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                      <div className="bg-[#111] p-3 border border-green-900/30">
-                        <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter flex items-center gap-2">
-                          <Activity size={10} className="text-green-500"/> Crypto Outlook
+                      <div className="bg-[#111] p-3 border border-orange-900/30">
+                        <h3 className="text-white font-bold mb-2 text-xs uppercase tracking-tighter flex items-center gap-2">
+                          <Activity size={10} className="text-orange-500"/> Crypto Outlook
                         </h3>
-                        <p className="opacity-80 leading-tight text-green-100/70">{fngSummary?.crypto_outlook || "Sentiment analysis pending..."}</p>
+                        <p className="opacity-80 leading-tight text-orange-100/70">{fngSummary?.crypto_outlook || "Sentiment analysis pending..."}</p>
                       </div>
                       <div className="bg-[#111] p-3 border border-red-900/30">
-                        <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter flex items-center gap-2">
-                          <LineChart size={10} className="text-red-500"/> Equity Outlook
+                        <h3 className="text-white font-bold mb-2 text-xs uppercase tracking-tighter flex items-center gap-2">
+                          <LineChart size={10} className="text-amber-500"/> Equity Outlook
                         </h3>
                         <p className="opacity-80 leading-tight text-red-100/70">{fngSummary?.equity_outlook || "Sentiment analysis pending..."}</p>
                       </div>
@@ -586,9 +587,9 @@ export default function TerminalPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.05)_0%,transparent_70%)] pointer-events-none"></div>
           <div className="max-w-7xl mx-auto relative z-10">
             <h1 className="text-2xl font-black text-white mb-2 flex items-center gap-2 tracking-tighter">
-              <Newspaper className="text-red-500 glow-red animate-pulse"/> GLOBAL INTEL FEED
+              <Newspaper className="text-amber-500 glow-amber animate-pulse"/> GLOBAL INTEL FEED
             </h1>
-            <p className="text-red-500/70 mb-6 font-mono text-xs uppercase tracking-wider flex items-center gap-2">
+            <p className="text-amber-500/70 mb-6 font-mono text-xs uppercase tracking-wider flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
               LIVE INCOMING TRANSMISSIONS
             </p>
@@ -606,21 +607,21 @@ export default function TerminalPage() {
                     <div className="flex justify-between items-start mb-3 pb-3 border-b border-red-900/20">
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-red-900/20 border border-red-500/30 flex items-center justify-center">
-                          <span className="text-red-500 font-bold text-[10px]">{news.source_info?.name?.substring(0,2).toUpperCase() || "XX"}</span>
+                          <span className="text-amber-500 font-bold text-xs">{news.source_info?.name?.substring(0,2).toUpperCase() || "XX"}</span>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-green-400 font-bold text-[10px] uppercase tracking-wider">{news.source_info?.name || "UNKNOWN"}</span>
-                          <span className="text-gray-600 text-[9px] font-mono">{formatTime(news.published_on)}</span>
+                          <span className="text-orange-400 font-bold text-xs uppercase tracking-wider">{news.source_info?.name || "UNKNOWN"}</span>
+                          <span className="text-gray-600 text-xs font-mono">{formatTime(news.published_on)}</span>
                         </div>
                       </div>
-                      <div className="px-2 py-0.5 bg-red-950/30 border border-red-900/30 rounded text-[9px] text-red-500 font-mono animate-pulse">
+                      <div className="px-2 py-0.5 bg-red-950/30 border border-red-900/30 rounded text-xs text-amber-500 font-mono animate-pulse">
                         LIVE
                       </div>
                     </div>
 
                     {/* Content */}
                     <a href={news.url} target="_blank" rel="noreferrer" className="flex-1 block">
-                      <h3 className="text-white font-bold text-sm leading-snug mb-2 group-hover:text-red-400 transition-colors line-clamp-2">
+                      <h3 className="text-white font-bold text-sm leading-snug mb-2 group-hover:text-amber-400 transition-colors line-clamp-2">
                         {news.title}
                       </h3>
                       <p className="text-gray-500 text-xs leading-relaxed line-clamp-3 font-mono">
@@ -630,7 +631,7 @@ export default function TerminalPage() {
 
                     {/* Footer decoration */}
                     <div className="mt-4 flex justify-between items-center pt-2 border-t border-red-900/10">
-                       <span className="text-[9px] text-red-900/60 font-mono tracking-widest">ENCRYPTED://{Math.floor(Math.random()*9999)}</span>
+                       <span className="text-xs text-red-900/60 font-mono tracking-widest">ENCRYPTED://{Math.floor(Math.random()*9999)}</span>
                        <div className="flex gap-1">
                           <span className="w-1 h-1 bg-red-500 rounded-full animate-ping delay-75"></span>
                           <span className="w-1 h-1 bg-red-500 rounded-full animate-ping delay-150"></span>
@@ -648,23 +649,23 @@ export default function TerminalPage() {
 
 
           <div className="h-14 border-b border-[#333] bg-[#050505] flex items-center px-4 gap-8 shrink-0 shadow-lg relative z-10">
-            <div className="flex flex-col"><span className="text-green-500 font-bold text-sm bg-green-900/10 px-2 py-1 rounded border border-green-500/30 shadow-[0_0_10px_rgba(34,197,94,0.2)] tracking-widest">{topTicker.sym}{!activeItemData.isMock ? '/USDT' : ''}</span></div>
+            <div className="flex flex-col"><span className="text-orange-500 font-bold text-sm bg-orange-900/10 px-2 py-1 rounded border border-orange-500/30 shadow-[0_0_10px_rgba(249,115,22,0.2)] tracking-widest">{topTicker.sym}{!activeItemData.isMock ? '/USDT' : ''}</span></div>
             <div className="flex gap-2 items-baseline w-[150px]">
-              <span className={`text-2xl font-black tracking-tighter ${topTicker.isUp ? 'text-green-500 bot-text-glow' : 'text-red-500 glow-red'}`}>${topTicker.price}</span>
+              <span className={`text-2xl font-black tracking-tighter ${topTicker.isUp ? 'text-orange-500 bot-text-glow' : 'text-amber-500 glow-amber'}`}>${topTicker.price}</span>
             </div>
             <div className="flex flex-col w-[100px]">
-              <span className={`font-bold ${topTicker.isUp ? 'text-green-500' : 'text-red-500'}`}>
+              <span className={`font-bold ${topTicker.isUp ? 'text-orange-500' : 'text-amber-500'}`}>
                 {topTicker.isUp ? '+' : ''}{topTicker.chgAmt} ({topTicker.chgPct})
               </span>
             </div>
-            <div className="flex gap-8 text-[10px] font-bold tracking-wider">
-              <div className="flex flex-col"><span className="text-gray-500">BID</span><span className="text-green-400">${topTicker.bid}</span></div>
-              <div className="flex flex-col"><span className="text-gray-500">ASK</span><span className="text-red-400">${topTicker.ask}</span></div>
+            <div className="flex gap-8 text-xs font-bold tracking-wider">
+              <div className="flex flex-col"><span className="text-gray-500">BID</span><span className="text-orange-400">${topTicker.bid}</span></div>
+              <div className="flex flex-col"><span className="text-gray-500">ASK</span><span className="text-amber-400">${topTicker.ask}</span></div>
               <div className="flex flex-col"><span className="text-gray-500">24H HIGH</span><span className="text-gray-300">${topTicker.high}</span></div>
               <div className="flex flex-col"><span className="text-gray-500">24H LOW</span><span className="text-gray-300">${topTicker.low}</span></div>
               <div className="flex flex-col border-l border-[#333] pl-8">
                  <span className="text-gray-500">MARKET VOLATILITY (VIX)</span>
-                 <span className="text-red-500 font-bold text-sm animate-pulse">{vix.value} <span className="text-[10px] font-normal text-red-500/70">({vix.chg})</span></span>
+                 <span className="text-amber-500 font-bold text-sm animate-pulse">{vix.value} <span className="text-xs font-normal text-amber-500/70">({vix.chg})</span></span>
               </div>
             </div>
           </div>
@@ -674,11 +675,11 @@ export default function TerminalPage() {
               
               <ResizablePanel defaultSize={15} minSize={12} className="bg-black border-r border-[#333] flex flex-col">
                 <div className="flex flex-col shrink-0">
-                  <div className="px-4 py-2 text-green-500 border-b border-[#333] font-bold bg-[#111] tracking-widest text-[10px]">
+                  <div className="px-4 py-2 text-orange-500 border-b border-[#333] font-bold bg-[#111] tracking-widest text-xs">
                     MACRO WATCHLIST
                   </div>
                   
-                  <div className="flex justify-between px-4 py-2 text-gray-500 border-b border-[#333] text-[9px] font-mono tracking-wider">
+                  <div className="flex justify-between px-4 py-2 text-gray-500 border-b border-[#333] text-xs font-mono tracking-wider">
                     <span>SYMBOL</span><span>PRICE / 24H</span>
                   </div>
                 </div>
@@ -688,25 +689,25 @@ export default function TerminalPage() {
                     <div 
                       key={i} 
                       onClick={() => setActiveSymbol(item.sym)} 
-                      className={`flex justify-between items-center px-4 py-2.5 border-b border-[#333]/30 hover:bg-[#111] cursor-pointer transition-colors group ${activeSymbol === item.sym ? 'bg-[#111] border-l-2 border-green-500' : ''}`}
+                      className={`flex justify-between items-center px-4 py-2.5 border-b border-[#333]/30 hover:bg-[#111] cursor-pointer transition-colors group ${activeSymbol === item.sym ? 'bg-[#111] border-l-2 border-orange-500' : ''}`}
                     >
                       <div className="flex flex-col">
-                        <span className={`font-bold tracking-wider ${activeSymbol === item.sym ? 'text-white' : 'text-gray-400'} group-hover:text-white`}>{item.sym} {item.isMock && <span className="text-[8px] text-blue-400 bg-blue-400/10 px-1 rounded ml-1">STK</span>}</span>
-                        <span className="text-gray-600 text-[9px] truncate w-[70px] uppercase">{item.name}</span>
+                        <span className={`font-bold tracking-wider ${activeSymbol === item.sym ? 'text-white' : 'text-gray-400'} group-hover:text-white`}>{item.sym} {item.isMock && <span className="text-[10px] text-blue-400 bg-blue-400/10 px-1 rounded ml-1">STK</span>}</span>
+                        <span className="text-gray-600 text-xs truncate w-[70px] uppercase">{item.name}</span>
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="flex flex-col items-end">
                           <span className={`font-mono font-medium ${activeSymbol === item.sym ? 'text-white' : 'text-gray-400'} group-hover:text-white`}>{item.price}</span>
-                          <span className={`text-[9px] ${item.isUp ? 'text-green-500' : 'text-red-500'}`}>{item.chg}</span>
+                          <span className={`text-xs ${item.isUp ? 'text-orange-500' : 'text-amber-500'}`}>{item.chg}</span>
                         </div>
-                        <X size={12} onClick={(e) => handleRemoveSymbol(e, item.sym)} className="text-gray-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                        <X size={12} onClick={(e) => handleRemoveSymbol(e, item.sym)} className="text-gray-600 hover:text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                       </div>
                     </div>
                   ))}
                 </div>
               </ResizablePanel>
               
-              <ResizableHandle className="bg-[#333] w-1 hover:bg-green-500 transition-colors" />
+              <ResizableHandle className="bg-[#333] w-1 hover:bg-orange-500 transition-colors" />
               
               <ResizablePanel defaultSize={60} minSize={40} className="bg-black flex flex-col relative">
                 {/* GRID OVERLAY */}
@@ -714,9 +715,9 @@ export default function TerminalPage() {
 
                 <div className="flex items-center gap-4 px-4 py-2 border-b border-[#333] z-10 shrink-0 bg-[#050505]">
                   <div className="flex items-center gap-2">
-                    <span className="text-gray-500 mr-2 text-[10px] tracking-wider font-bold">TIMEFRAME:</span>
+                    <span className="text-gray-500 mr-2 text-xs tracking-wider font-bold">TIMEFRAME:</span>
                     {['1m','5m','15m','1h','4h','1d'].map(tf => (
-                      <span key={tf} onClick={() => setChartTimeframe(tf)} className={`px-2 py-1 rounded-sm cursor-pointer transition-all uppercase text-[10px] font-bold ${tf === chartTimeframe ? 'bg-green-500 text-black shadow-[0_0_10px_rgba(34,197,94,0.4)]' : 'hover:bg-[#111] text-gray-500 hover:text-green-500'}`}>
+                      <span key={tf} onClick={() => setChartTimeframe(tf)} className={`px-2 py-1 rounded-sm cursor-pointer transition-all uppercase text-xs font-bold ${tf === chartTimeframe ? 'bg-orange-500 text-black shadow-[0_0_10px_rgba(249,115,22,0.4)]' : 'hover:bg-[#111] text-gray-500 hover:text-orange-500'}`}>
                         {tf}
                       </span>
                     ))}
@@ -727,69 +728,11 @@ export default function TerminalPage() {
                 </div>
               </ResizablePanel>
               
-              <ResizableHandle className="bg-[#333] w-1 hover:bg-green-500 transition-colors" />
+              <ResizableHandle className="bg-[#333] w-1 hover:bg-orange-500 transition-colors" />
               
               <ResizablePanel defaultSize={25} minSize={20} className="bg-black flex flex-col border-l border-[#333]">
-                {/* BOT FACE Visual Component */}
-                <div className="h-48 bg-[#050505] border-b border-[#333] flex flex-col items-center justify-center relative overflow-hidden shrink-0">
-                   <div className="absolute inset-0 cyber-grid opacity-20"></div>
-                   
-                   {/* SCANLINES */}
-                   <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 pointer-events-none bg-[length:100%_2px,3px_100%]"></div>
-
-                   {/* BOT CONTAINER */}
-                   <div className={`relative transition-all duration-500 ${botEmotion === 'alert' ? 'scale-110' : 'scale-100'}`}>
-                      {/* HEAD SHELL - CRAB SHAPE */}
-                      <div className="relative w-32 h-24">
-                         
-                         {/* EYES */}
-                         <div className="absolute top-8 left-4 w-6 h-6 bg-black border-2 border-red-500 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(239,68,68,0.5)] z-20">
-                            <div className={`w-2 h-2 bg-red-500 rounded-full ${botEmotion === 'speaking' ? 'animate-ping' : ''}`}></div>
-                         </div>
-                         <div className="absolute top-8 right-4 w-6 h-6 bg-black border-2 border-red-500 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(239,68,68,0.5)] z-20">
-                            <div className={`w-2 h-2 bg-red-500 rounded-full ${botEmotion === 'speaking' ? 'animate-ping' : ''}`}></div>
-                         </div>
-
-                         {/* VISOR (MOUTH/DISPLAY) */}
-                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-20 h-8 bg-black border border-green-500/50 rounded flex items-center justify-center overflow-hidden">
-                            {botEmotion === 'thinking' ? (
-                               <div className="flex gap-1">
-                                  <div className="w-1 h-4 bg-green-500 animate-bounce delay-75"></div>
-                                  <div className="w-1 h-4 bg-green-500 animate-bounce delay-150"></div>
-                                  <div className="w-1 h-4 bg-green-500 animate-bounce delay-300"></div>
-                               </div>
-                            ) : botEmotion === 'speaking' ? (
-                               <div className="w-full h-full flex items-center justify-center gap-0.5">
-                                 {[...Array(8)].map((_,i) => (
-                                    <div key={i} className="w-1 bg-green-500 animate-[pulse_0.5s_ease-in-out_infinite]" style={{height: `${Math.random() * 100}%`, animationDelay: `${i*0.1}s`}}></div>
-                                 ))}
-                               </div>
-                            ) : botEmotion === 'alert' ? (
-                               <div className="text-red-500 font-bold text-[10px] animate-pulse">WARNING</div>
-                            ) : (
-                               <div className="w-12 h-0.5 bg-green-500/50"></div> 
-                            )}
-                         </div>
-
-                         {/* CRAB LEGS (DECORATIVE) */}
-                         <div className="absolute -top-4 -left-6 w-8 h-12 border-l-4 border-t-4 border-red-900/50 rounded-tl-xl -rotate-12"></div>
-                         <div className="absolute -top-4 -right-6 w-8 h-12 border-r-4 border-t-4 border-red-900/50 rounded-tr-xl rotate-12"></div>
-                         
-                         {/* MAIN BODY GLOW */}
-                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-red-900/20 rounded-xl -z-10"></div>
-                      </div>
-                   </div>
-
-                   {/* STATUS TEXT */}
-                   <div className="mt-2 text-center z-20">
-                      <div className={`text-[10px] font-bold tracking-[0.2em] ${botEmotion === 'alert' ? 'text-red-500 animate-pulse' : 'text-green-500'}`}>
-                         STATUS: {botEmotion.toUpperCase()}
-                      </div>
-                      <div className="text-[9px] text-gray-500 mt-1 h-4 font-mono">{botMessage}</div>
-                   </div>
-                </div>
-
-                <div className="px-4 py-2 text-green-500 border-b border-[#333] font-bold bg-[#111] flex gap-2 items-center tracking-widest text-[10px]">
+                
+                <div className="px-4 py-2 text-orange-500 border-b border-[#333] font-bold bg-[#111] flex gap-2 items-center tracking-widest text-xs">
                   <Zap size={14} className={isAiTyping ? "animate-spin" : ""} /> AI COMMAND LINE
                 </div>
 
@@ -797,10 +740,10 @@ export default function TerminalPage() {
                    <div className="flex-1 overflow-y-auto no-scrollbar space-y-4 mb-4 flex flex-col">
                       {chatHistory.map((msg, i) => (
                         <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                          <div className={`p-3 rounded-sm text-[11px] leading-relaxed max-w-[95%] border ${msg.role === 'user' ? 'bg-[#111] text-green-400 border-green-900/30' : 'bg-black text-gray-300 border-[#333] border-l-2 border-l-red-500'}`}>
+                          <div className={`p-3 rounded-sm text-sm leading-relaxed max-w-[95%] border ${msg.role === 'user' ? 'bg-[#111] text-orange-400 border-orange-900/30' : 'bg-black text-gray-300 border-[#333] border-l-2 border-l-red-500'}`}>
                             {msg.role === 'system' || msg.role === 'ai' ? (
                               <div className="flex items-start gap-2">
-                                 {msg.role === 'ai' && <Zap size={12} className="mt-0.5 text-red-500 shrink-0"/>}
+                                 {msg.role === 'ai' && <Zap size={12} className="mt-0.5 text-amber-500 shrink-0"/>}
                                  <div className="whitespace-pre-wrap font-medium font-mono">
                                    <ReactMarkdown
                                      components={{
@@ -820,7 +763,7 @@ export default function TerminalPage() {
                         </div>
                       ))}
                       {isAiTyping && (
-                        <div className="text-green-500 text-[10px] italic pl-3 border-l-2 border-green-500 animate-pulse font-medium font-mono">
+                        <div className="text-orange-500 text-xs italic pl-3 border-l-2 border-orange-500 animate-pulse font-medium font-mono">
                           {activeSymbol} Analysis in progress...
                         </div>
                       )}
@@ -832,15 +775,15 @@ export default function TerminalPage() {
                             key={idx}
                             onClick={() => handleSendChat(suggestion)}
                             disabled={isAiTyping}
-                            className="text-[9px] uppercase tracking-wider whitespace-nowrap bg-black border border-[#333] px-3 py-1 text-gray-500 hover:bg-green-900/20 hover:text-green-500 hover:border-green-500/50 transition-all disabled:opacity-50"
+                            className="text-xs uppercase tracking-wider whitespace-nowrap bg-black border border-[#333] px-3 py-1 text-gray-500 hover:bg-orange-900/20 hover:text-orange-500 hover:border-orange-500/50 transition-all disabled:opacity-50"
                          >
                             {suggestion}
                          </button>
                       ))}
                    </div>
 
-                   <div className="bg-[#050505] border border-[#333] p-2 flex items-center shrink-0 focus-within:border-green-500 transition-colors relative group">
-                     <span className="text-green-500 mr-2 text-xs">{'>'}</span>
+                   <div className="bg-[#050505] border border-[#333] p-2 flex items-center shrink-0 focus-within:border-orange-500 transition-colors relative group">
+                     <span className="text-orange-500 mr-2 text-xs">{'>'}</span>
                      <input 
                        type="text" 
                        value={chatInput}
@@ -848,12 +791,12 @@ export default function TerminalPage() {
                        onKeyDown={(e) => e.key === 'Enter' && handleSendChat(chatInput)}
                        placeholder={`ENTER COMMAND...`} 
                        disabled={isAiTyping}
-                       className="bg-transparent outline-none w-full text-green-500 placeholder-[#333] disabled:opacity-50 pr-8 font-mono uppercase text-[11px]"
+                       className="bg-transparent outline-none w-full text-orange-500 placeholder-[#333] disabled:opacity-50 pr-8 font-mono uppercase text-sm"
                      />
                      <button 
                         onClick={() => handleSendChat(chatInput)}
                         disabled={!chatInput.trim() || isAiTyping}
-                        className="absolute right-2 text-[#333] group-hover:text-green-500 disabled:opacity-30"
+                        className="absolute right-2 text-[#333] group-hover:text-orange-500 disabled:opacity-30"
                      >
                         <Send size={14} />
                      </button>
