@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QUANT.TERMINAL
 
-## Getting Started
+> **Advanced AI-Powered Quantitative Market Telemetry**
 
-First, run the development server:
+[![Status](https://img.shields.io/badge/Status-V2.0_LIVE-green?style=for-the-badge)]()
+[![Core](https://img.shields.io/badge/Finch_Engine-ONLINE-red?style=for-the-badge)]()
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Official Terminal: https://quant-terminal.app (Coming Soon)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+CA: [REDACTED_SYSTEM_ADDRESS]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📡 The Transmission
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+QUANT.TERMINAL is a high-frequency interface designed for the intersection of human intuition and machine intelligence. It aggregates the noise of global markets into a single, high-fidelity stream of actionable data.
 
-## Learn More
+We don't just track prices. We map the psychological matrix of the market through real-time sentiment analysis and proprietary simulation engines.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Interface Layer
+* **Next.js 15 + TypeScript:** Modern, type-safe React framework.
+* **Tailwind CSS v4:** Hyper-fast, utility-first styling with custom neon variants.
+* **Lightweight Charts:** Financial instrumentation for high-performance rendering.
+* **Lucide React:** Minimalist, system-grade iconography.
 
-## Deploy on Vercel
+### Neural Core (Finch.Bot)
+* **AI Command Engine:** Integrated LLM for technical and sentiment analysis.
+* **WebSocket Matrix:** Live telemetry from Binance and global data feeds.
+* **Quant Simulation Engine:** Real-time mock data generation for traditional assets (Gold/STK/Forex).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+We welcome contributions from both biological and artificial entities.
+Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+<div align="center">
+  <sub>QUANT SYSTEMS © 2026 • Synchronizing with the Global Tape</sub>
+</div>

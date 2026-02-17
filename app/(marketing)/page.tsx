@@ -14,14 +14,14 @@ export default function LandingPage() {
       <nav className="border-b border-zinc-900 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-zinc-900 border border-zinc-800 flex items-center justify-center rounded">
-              <Terminal size={18} className="text-green-500" />
+            <div className="w-10 h-10 border border-zinc-800 flex items-center justify-center rounded overflow-hidden">
+              <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
             </div>
-            <span className="font-bold tracking-tighter text-lg">QUANT<span className="text-green-500">.TERMINAL</span></span>
+            <span className="font-bold tracking-tighter text-lg uppercase">QUANT<span className="text-green-500">.TERMINAL</span></span>
           </div>
           <div className="flex items-center gap-6 text-sm font-medium">
              <Link href="#features" className="text-zinc-500 hover:text-white transition-colors">FEATURES</Link>
-             <Link href="#bot" className="text-zinc-500 hover:text-red-500 transition-colors">FINCH.BOT</Link>
+             <Link href="#bot" className="text-zinc-500 hover:text-red-500 transition-colors uppercase">C.F.A</Link>
              <Link 
                href="/terminal" 
                className="bg-green-600 hover:bg-green-500 text-black px-4 py-2 font-bold flex items-center gap-2 transition-all hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"
@@ -40,13 +40,42 @@ export default function LandingPage() {
             SYSTEM ONLINE: V2.0 LIVE
           </div>
           
+          {/* CRAB ICON - ROBOT CRAB WITH OPEN CLAWS */}
+          <div className="flex justify-center mb-8">
+            <div className="relative w-20 h-14">
+              {/* EYES - ROBOTIC */}
+              <div className="absolute top-1 left-2 w-3 h-3 bg-black border-2 border-red-500 rounded-full flex items-center justify-center shadow-[0_0_5px_rgba(239,68,68,0.5)]">
+                <div className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></div>
+              </div>
+              <div className="absolute top-1 right-2 w-3 h-3 bg-black border-2 border-red-500 rounded-full flex items-center justify-center shadow-[0_0_5px_rgba(239,68,68,0.5)]">
+                <div className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></div>
+              </div>
+              
+              {/* OPEN CLAWS - ROBOTIC */}
+              <div className="absolute -top-1 -left-6 w-8 h-6 border-l-2 border-t-2 border-red-500 rounded-tl-lg -rotate-12 bg-red-900/10 flex items-start justify-start">
+                <div className="w-3 h-2 border-r border-t border-red-500 rounded-tr-sm -rotate-45 mt-1 ml-1"></div>
+              </div>
+              <div className="absolute -top-1 -right-6 w-8 h-6 border-r-2 border-t-2 border-red-500 rounded-tr-lg rotate-12 bg-red-900/10 flex items-start justify-end">
+                <div className="w-3 h-2 border-l border-t border-red-500 rounded-tl-sm rotate-45 mt-1 mr-1"></div>
+              </div>
+              
+              {/* ROBOT BODY PANEL */}
+              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-12 h-4 bg-black border border-green-500/50 rounded flex items-center justify-center">
+                <div className="w-8 h-0.5 bg-green-500/50"></div>
+              </div>
+              
+              {/* MAIN BODY GLOW */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-red-900/20 rounded-lg -z-10"></div>
+            </div>
+          </div>
+          
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-tight">
             ALGORITHMIC TRADING<br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-700">REIMAGINED</span>
           </h1>
           
-          <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Advanced real-time analytics, AI-powered sentiment matrix, and the all-new <span className="text-red-500 font-bold border-b border-red-500/50">Finch.Bot</span> automated assistant.
+          <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed uppercase">
+            Advanced real-time analytics, AI-powered sentiment matrix, and the all-new <span className="text-red-500 font-bold border-b border-red-500/50">C.F.A</span> automated assistant.
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
@@ -174,7 +203,7 @@ export default function LandingPage() {
          </div>
       </section>
 
-      {/* FEATURE 3: FINCH BOT (RED HIGHLIGHT) */}
+      {/* FEATURE 3: C.F.A (RED HIGHLIGHT) */}
       <section id="bot" className="py-24 px-6 border-b border-zinc-900 bg-[#050000] relative overflow-hidden">
          <div className="absolute top-0 right-0 w-1/3 h-full bg-red-900/5 blur-[100px] pointer-events-none"></div>
          
@@ -183,9 +212,9 @@ export default function LandingPage() {
                <div className="w-12 h-12 bg-red-900/20 border border-red-500/50 flex items-center justify-center rounded mb-6">
                   <Bot className="text-red-500" />
                </div>
-               <h2 className="text-3xl font-bold mb-4 text-white">MEET <span className="text-red-500">FINCH.BOT</span></h2>
-               <p className="text-zinc-400 leading-relaxed mb-6">
-                 Your personal automated assistant. Finch monitors the charts 24/7 so you don't have to.
+               <h2 className="text-3xl font-bold mb-4 text-white">MEET <span className="text-red-500">C.F.A</span></h2>
+               <p className="text-zinc-400 leading-relaxed mb-6 uppercase">
+                 Your personal automated assistant. C.F.A monitors the charts 24/7 so you don't have to.
                  Reactive, intelligent, and always watching for the next breakout.
                </p>
                
@@ -327,75 +356,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SECTION 7: COMMUNITY & SOCIAL */}
-      <section className="py-24 px-6 border-b border-zinc-900 bg-[#020202]">
-         <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-8">JOIN THE <span className="text-white bg-clip-text text-transparent bg-gradient-to-r from-zinc-200 to-zinc-500">SYNDICATE</span></h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-               {['Discord', 'Twitter/X', 'GitHub', 'Telegram'].map((social, i) => (
-                  <div key={i} className="p-6 border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-800/50 rounded-lg transition-all cursor-pointer group">
-                     <div className="w-full text-center font-bold text-zinc-400 group-hover:text-white group-hover:scale-110 transition-transform">
-                        {social}
-                     </div>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
-
-      {/* SECTION 8: PRICING (SIMPLE) */}
-      <section className="py-24 px-6 border-b border-zinc-900 bg-black">
-         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-            {/* Free Tier */}
-            <div className="border border-zinc-800 p-8 rounded-lg bg-zinc-900/10 hover:border-zinc-700 transition-colors">
-               <div className="text-zinc-500 font-bold mb-2 tracking-widest text-xs">STARTER</div>
-               <div className="text-4xl font-black text-white mb-6">$0</div>
-               <ul className="space-y-4 text-sm text-zinc-400 mb-8">
-                  <li>- 15 min Delayed Data</li>
-                  <li>- Basic Charting</li>
-                  <li>- Community Access</li>
-               </ul>
-               <button className="w-full py-3 border border-zinc-700 hover:bg-zinc-800 text-white font-bold rounded transition-colors">START FREE</button>
-            </div>
-            
-            {/* Pro Tier (Highlighted) */}
-            <div className="border border-green-500 p-8 rounded-lg bg-green-900/10 relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(34,197,94,0.1)]">
-               <div className="absolute top-0 right-0 bg-green-500 text-black text-xs font-bold px-3 py-1 rounded-bl">RECOMMENDED</div>
-               <div className="text-green-500 font-bold mb-2 tracking-widest text-xs">TRADER</div>
-               <div className="text-4xl font-black text-white mb-6">$49<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
-               <ul className="space-y-4 text-sm text-zinc-300 mb-8">
-                  <li className="flex items-center gap-2"><Zap size={14} className="text-green-500"/> Real-time Data</li>
-                  <li className="flex items-center gap-2"><Zap size={14} className="text-green-500"/> AI Sentiment Access</li>
-                  <li className="flex items-center gap-2"><Zap size={14} className="text-green-500"/> Finch.Bot Assistant</li>
-               </ul>
-               <button className="w-full py-3 bg-green-600 hover:bg-green-500 text-black font-bold rounded transition-colors shadow-[0_0_15px_rgba(34,197,94,0.4)]">GO PRO</button>
-            </div>
-
-            {/* Institutional Tier */}
-            <div className="border border-zinc-800 p-8 rounded-lg bg-zinc-900/10 hover:border-zinc-700 transition-colors">
-               <div className="text-purple-500 font-bold mb-2 tracking-widest text-xs">INSTITUTIONAL</div>
-               <div className="text-4xl font-black text-white mb-6">CUSTOM</div>
-               <ul className="space-y-4 text-sm text-zinc-400 mb-8">
-                  <li>- API Access</li>
-                  <li>- White Labeling</li>
-                  <li>- Dedicated Support</li>
-               </ul>
-               <button className="w-full py-3 border border-zinc-700 hover:bg-zinc-800 text-white font-bold rounded transition-colors">CONTACT SALES</button>
-            </div>
-         </div>
-      </section>
-
-      {/* SECTION 9: REVIEWS / SOCIAL PROOF */}
-      <section className="py-24 px-6 border-b border-zinc-900 bg-[#050505]">
-          <div className="max-w-5xl mx-auto text-center mb-16">
-            <h2 className="text-2xl font-bold text-zinc-300">TRUSTED BY QUANT TEAMS AT</h2>
-            <div className="flex flex-wrap justify-center gap-8 mt-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-               {['BERKSHIRE', 'BLACKROCK', 'VANGUARD', 'CITADEL', 'JANE STREET'].map((brand, i) => (
-                  <div key={i} className="text-xl font-black text-zinc-600 hover:text-white px-4">{brand}</div>
-               ))}
-            </div>
-          </div>
-      </section>
+      {/* SECTION 7: MVP BETA ACCESS */}
+     
 
       {/* PRE-FOOTER */}
       <section className="py-32 px-6 bg-[#050505] border-t border-zinc-900 text-center relative overflow-hidden">
@@ -415,10 +377,12 @@ export default function LandingPage() {
       {/* FOOTER */}
       <footer className="py-12 px-6 border-t border-zinc-900 bg-black text-zinc-600 text-sm text-center">
          <div className="flex items-center justify-center gap-2 mb-4 opacity-50">
-            <Terminal size={16} />
-            <span className="font-bold">QUANT.TERMINAL</span>
+            <div className="w-6 h-6 border border-zinc-800 flex items-center justify-center rounded overflow-hidden grayscale">
+               <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
+            </div>
+            <span className="font-bold uppercase tracking-widest text-xs">QUANT<span className="text-green-500">.TERMINAL</span></span>
          </div>
-         <p>&copy; 2026 QUANT TERMINAL. POWERED BY NEXT.JS 15 & TAILWIND V4.</p>
+         <p className="font-mono text-[10px]">&copy; 2026 QUANT TERMINAL SYSTEMS. POWERED BY NEXT.JS 15 & TAILWIND V4.</p>
       </footer>
     </div>
   );

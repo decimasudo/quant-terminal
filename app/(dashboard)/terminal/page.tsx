@@ -456,15 +456,14 @@ export default function TerminalPage() {
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
              <div className="relative">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-green-500 to-emerald-900 bot-glow-green flex items-center justify-center relative overflow-hidden">
-                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
-                   <Activity size={18} className="text-white z-10 animate-pulse" />
+                <div className="w-8 h-8 rounded border border-zinc-800 flex items-center justify-center relative overflow-hidden">
+                   <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-black animate-ping"></div>
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-black"></div>
+                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black animate-ping"></div>
+                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black"></div>
              </div>
              <div className="flex flex-col">
-                <span className="text-white font-black text-lg tracking-widest leading-none bot-text-glow font-mono">CLAY FINANCIAL <span className="text-green-500">AGENT</span></span>
+                <span className="text-white font-black text-lg tracking-widest leading-none bot-text-glow font-mono uppercase">C.F.A<span className="text-green-500">_OPS</span></span>
                 <span className="text-[9px] text-green-500/80 tracking-[0.2em] font-bold">QUANT ASSISTANT V2.0</span>
              </div>
           </div>
