@@ -148,6 +148,64 @@ export default function TerminalPage() {
   const [chartTimeframe, setChartTimeframe] = useState("1h")
   const [newsList, setNewsList] = useState<any[]>([])
   
+  const [fngSummary, setFngSummary] = useState<any>(null)
+  const [isFngLoading, setIsFngLoading] = useState(false)
+  
+  const fetchFngSummary = async () => {
+    if (fngSummary || isFngLoading) return;
+
+    // 1. Check LocalStorage Cache
+    try {
+      const cached = localStorage.getItem('fng_summary_cache');
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        const fourHours = 4 * 60 * 60 * 1000;
+        if (Date.now() - timestamp < fourHours) {
+          setFngSummary(data);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn("Cache read error:", e);
+    }
+
+    setIsFngLoading(true);
+    try {
+      const prompt = "Generate a professional Daily Sentiment Summary for a financial terminal in ENGLISH only. Use objective, data-driven, and brief language. Focus on current market divergence where crypto is in greed (index 74) while equities are in fear (index 35) and VIX is rising. Format your response EXACTLY as a JSON object with these fields: 'intro' (one short paragraph), 'crypto_outlook' (one sentence summarizing crypto sentiment), and 'equity_outlook' (one sentence summarizing global equity sentiment). Do not use any markdown code blocks, just return the raw JSON string.";
+      const res = await fetch('/api/ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, marketContext: "Crypto Fear: 74 (Greed), Equity Fear: 35 (Fear), VIX: 14.35" })
+      });
+      const data = await res.text();
+      const cleanData = data.replace(/```json/g, "").replace(/```/g, "").trim();
+      const json = JSON.parse(cleanData);
+      
+      setFngSummary(json);
+      
+      // 2. Save to LocalStorage Cache
+      localStorage.setItem('fng_summary_cache', JSON.stringify({
+        data: json,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      console.error("F&G Fetch Error:", e);
+      setFngSummary({
+        intro: "Markets are showing significant divergence today. Crypto sentiment remains bullish driven by ETF inflows, while traditional equity markets signal growing anxiety amid macroeconomic uncertainty.",
+        crypto_outlook: "Sentiment remains greed-heavy, often preceding a short consolidation before trend continuation.",
+        equity_outlook: "Traditional indicators shift towards fear as investors pivot to safe-haven assets like Gold."
+      });
+    } finally {
+      setIsFngLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (mainMenu === 'fng') {
+      fetchFngSummary();
+    }
+  }, [mainMenu]);
+
   const [newSymbolInput, setNewSymbolInput] = useState("")
   const [watchlist, setWatchlist] = useState([
     // CRYPTOCURRENCY (LIVE VIA WEBSOCKET)
@@ -429,19 +487,36 @@ export default function TerminalPage() {
                 <Zap size={16} className="text-[#f59e0b]"/> Daily Sentiment Summary
               </h2>
               <div className="text-[#848e9c] leading-relaxed space-y-4 text-xs">
-                <p>
-                  Pasar menunjukkan divergensi yang signifikan hari ini. Sementara <strong className="text-white">Crypto Fear & Greed Index</strong> berada di angka <span className="text-green-500">74 (Greed)</span> didorong oleh arus masuk ETF dan akumulasi institusional, pasar ekuitas tradisional justru menunjukkan tanda-tanda kecemasan.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-[#0b0e11] p-3 border border-[#1e2329]">
-                    <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter">Crypto Outlook</h3>
-                    <p className="opacity-80">Sentimen tetap bullish namun mendekati zona "Extreme Greed". Secara historis, ini sering mendahului konsolidasi harga singkat sebelum melanjutkan tren naik.</p>
+                {isFngLoading ? (
+                  <div className="animate-pulse space-y-4">
+                    <div className="h-4 bg-[#1e2329] rounded w-full"></div>
+                    <div className="h-4 bg-[#1e2329] rounded w-3/4"></div>
+                    <div className="grid grid-cols-2 gap-4 pt-4">
+                      <div className="h-20 bg-[#0b0e11] rounded"></div>
+                      <div className="h-20 bg-[#0b0e11] rounded"></div>
+                    </div>
                   </div>
-                  <div className="bg-[#0b0e11] p-3 border border-[#1e2329]">
-                    <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter">Equity Outlook</h3>
-                    <p className="opacity-80">Indeks CNN bergeser ke arah "Fear". Investor mulai berpindah ke safe-haven assets seperti Gold dan Treasury Bond di tengah ketidakpastian data inflasi mendatang.</p>
-                  </div>
-                </div>
+                ) : (
+                  <>
+                    <p className="leading-relaxed">
+                      {fngSummary?.intro || "Fetching market psychology analysis..."}
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                      <div className="bg-[#0b0e11] p-3 border border-[#1e2329]">
+                        <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter flex items-center gap-2">
+                          <Activity size={10} className="text-green-500"/> Crypto Outlook
+                        </h3>
+                        <p className="opacity-80 leading-tight">{fngSummary?.crypto_outlook || "Sentiment analysis pending..."}</p>
+                      </div>
+                      <div className="bg-[#0b0e11] p-3 border border-[#1e2329]">
+                        <h3 className="text-white font-bold mb-2 text-[10px] uppercase tracking-tighter flex items-center gap-2">
+                          <LineChart size={10} className="text-orange-500"/> Equity Outlook
+                        </h3>
+                        <p className="opacity-80 leading-tight">{fngSummary?.equity_outlook || "Sentiment analysis pending..."}</p>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
