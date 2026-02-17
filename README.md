@@ -1,4 +1,4 @@
-# QUANT.TERMINAL
+# CLAW FINANCIAL AGENT
 
 > **Advanced AI-Powered Quantitative Market Telemetry**
 
@@ -12,7 +12,7 @@ CA: [REDACTED_SYSTEM_ADDRESS]
 
 ## 📡 The Transmission
 
-QUANT.TERMINAL is a high-frequency interface designed for the intersection of human intuition and machine intelligence. It aggregates the noise of global markets into a single, high-fidelity stream of actionable data.
+CLAW FINANCIAL AGENT is a high-frequency interface designed for the intersection of human intuition and machine intelligence. It aggregates the noise of global markets into a single, high-fidelity stream of actionable data.
 
 We don't just track prices. We map the psychological matrix of the market through real-time sentiment analysis and proprietary simulation engines.
 
@@ -43,5 +43,5 @@ Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of co
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
-  <sub>QUANT SYSTEMS © 2026 • Synchronizing with the Global Tape</sub>
+  <sub>CLAW FINANCIAL AGENT © 2026 • Synchronizing with the Global Tape</sub>
 </div>

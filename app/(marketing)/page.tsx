@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { Activity, Zap, Terminal, Globe, Shield, ChevronsRight, ArrowRight, Bot, LineChart, Cpu, Github } from "lucide-react";
+import { Activity, Zap, Terminal, Globe, Shield, ChevronsRight, ArrowRight, Bot, LineChart, Cpu, Github, Twitter } from "lucide-react";
 
 export default function LandingPage() {
   return (
@@ -29,6 +29,14 @@ export default function LandingPage() {
                className="text-zinc-500 hover:text-orange-500 transition-colors"
              >
                <Github size={20} />
+             </a>
+             <a 
+               href="https://x.com/clawfinancialai" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-zinc-500 hover:text-orange-500 transition-colors"
+             >
+               <Twitter size={20} />
              </a>
              <Link 
                href="/terminal" 
@@ -92,6 +100,25 @@ export default function LandingPage() {
             <button className="w-full md:w-auto px-8 py-4 bg-black border border-zinc-800 text-zinc-300 font-bold text-lg hover:border-orange-500 hover:text-orange-500 transition-all flex items-center justify-center gap-2">
               VIEW DOCS
             </button>
+          </div>
+
+          <div className="flex items-center justify-center gap-6 mt-8">
+            <a 
+              href="https://github.com/decimasudo/quant-terminal" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-zinc-500 hover:text-orange-500 transition-colors"
+            >
+              <Github size={24} />
+            </a>
+            <a 
+              href="https://x.com/clawfinancialai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-zinc-500 hover:text-orange-500 transition-colors"
+            >
+              <Twitter size={24} />
+            </a>
           </div>
         </div>
 

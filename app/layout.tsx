@@ -12,6 +12,9 @@ const shareTechMono = Share_Tech_Mono({
 export const metadata: Metadata = {
   title: "Quant Terminal | Powered by FinRobot",
   description: "Professional grade market analysis terminal",
+  icons: {
+    icon: "/logo.jpeg",
+  },
 };
 
 export default function RootLayout({
