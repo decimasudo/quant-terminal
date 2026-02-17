@@ -48,7 +48,8 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  /* Keep default theme just in case, but Dark Mode is where the magic happens */
+  --radius: 0.25rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -83,46 +84,118 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* PITCH BLACK BACKGROUND for High Contrast */
+  --background: oklch(0 0 0); 
+  --foreground: oklch(0.9 0 0); /* Soft white text */
+
+  /* Surfaces slightly lighter but still very dark */
+  --card: oklch(0.05 0 0);
+  --card-foreground: oklch(0.9 0 0);
+  --popover: oklch(0.05 0 0);
+  --popover-foreground: oklch(0.9 0 0);
+
+  /* NEON GREEN - The "Helper Bot" Eyes / Profit Color */
+  --primary: oklch(0.75 0.25 145); 
+  --primary-foreground: oklch(0 0 0);
+
+  /* VIBRANT RED - The "Crab" Color / Downturn */
+  --secondary: oklch(0.6 0.25 25);
+  --secondary-foreground: oklch(1 0 0);
+
+  /* UI Elements */
+  --muted: oklch(0.15 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.15 0 0);
+  --accent-foreground: oklch(0.9 0 0);
+  --destructive: oklch(0.6 0.25 25);
+  
+  /* Borders - Sharp and distinct */
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.75 0.25 145); /* Focus ring is neon green */
+
+  /* Charts */
+  --chart-1: oklch(0.75 0.25 145); /* Green */
+  --chart-2: oklch(0.6 0.25 25);   /* Red */
+  --chart-3: oklch(0.5 0.2 250);
+  --chart-4: oklch(0.9 0.1 145);
+  --chart-5: oklch(0.7 0.2 30);
+  
+  --sidebar: oklch(0.05 0 0);
+  --sidebar-foreground: oklch(0.9 0 0);
+  --sidebar-primary: oklch(0.75 0.25 145);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.9 0 0);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.75 0.25 145);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
-    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* helper bot glow effects */
+  .bot-glow-green {
+    box-shadow: 0 0 10px oklch(0.75 0.25 145 / 0.5), inset 0 0 5px oklch(0.75 0.25 145 / 0.2);
+    border: 1px solid oklch(0.75 0.25 145);
+  }
+  .bot-text-glow {
+    text-shadow: 0 0 5px oklch(0.75 0.25 145 / 0.8);
+  }
+  
+  .bot-visor {
+    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+    border-top: 2px solid #333;
+    position: relative;
+    overflow: hidden;
+  }
+  .bot-visor::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+    animation: scan 3s infinite linear;
+    pointer-events: none;
+  }
+  @keyframes scan {
+    0% { transform: translateX(-150%); }
+    100% { transform: translateX(150%); }
+  }
+
+  .bot-eye {
+    width: 6px;
+    height: 18px;
+    background-color: oklch(0.75 0.25 145);
+    box-shadow: 0 0 8px oklch(0.75 0.25 145);
+    position: relative;
+    animation: blink 4s infinite;
+  }
+  /* Candlestick shape */
+  .bot-eye::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: 2px;
+    width: 2px; height: 26px;
+    background-color: oklch(0.75 0.25 145);
+  }
+  
+  @keyframes blink {
+    0%, 48%, 52%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.1); }
+  }
+
+  /* Cyberpunk Grid Background */
+  .cyber-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(30, 30, 30, 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 30, 30, 0.5) 1px, transparent 1px);
   }
 }
