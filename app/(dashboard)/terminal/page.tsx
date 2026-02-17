@@ -407,13 +407,7 @@ export default function TerminalPage() {
         </div>
       ) : (
         <>
-          <div className="h-10 border-b border-[#1e2329] bg-[#12161a] flex items-center justify-between px-4 shrink-0">
-            <div className="flex h-full items-center gap-6">
-              <span className="flex items-center gap-2 text-[#f59e0b] font-bold tracking-wider">
-                <LineChart size={14} /> CLAY FINANCIAL AGENT
-              </span>
-            </div>
-          </div>
+
 
           <div className="h-14 border-b border-[#1e2329] bg-[#0b0e11] flex items-center px-4 gap-8 shrink-0">
             <div className="flex flex-col"><span className="text-[#f59e0b] font-bold text-sm bg-[#1e2329]/50 px-2 py-1 rounded border border-[#f59e0b]/30">{topTicker.sym}{!activeItemData.isMock ? '/USDT' : ''}</span></div>
