@@ -10,7 +10,7 @@ const shareTechMono = Share_Tech_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Quant Terminal | Powered by FinRobot",
+  title: "Claw Financial Agent",
   description: "Professional grade market analysis terminal",
   icons: {
     icon: "/logo.jpeg",

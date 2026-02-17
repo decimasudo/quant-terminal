@@ -305,7 +305,7 @@ export default function TerminalPage() {
 
   const [chatInput, setChatInput] = useState("")
   const [chatHistory, setChatHistory] = useState([
-    { role: 'system', content: 'Quant Agent System Online. Monitoring macro & crypto markets.' },
+    { role: 'system', content: 'Claw Financial Agent Online. Monitoring macro & crypto markets.' },
     { role: 'system', content: 'Type your analysis command below.' }
   ])
   const [isAiTyping, setIsAiTyping] = useState(false)
