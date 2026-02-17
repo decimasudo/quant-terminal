@@ -8,7 +8,7 @@
 
 Official Terminal: www.clawfinancialagent.site/
 
-CA: [REDACTED_SYSTEM_ADDRESS]
+CA: 4PCrr3LPWNKEomthsdmcB83Qnh5XroCbwxmJxgN5pump
 
 Twitter: https://x.com/clawfinancialai
 
