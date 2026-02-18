@@ -10,10 +10,10 @@ const shareTechMono = Share_Tech_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Claw Financial Agent",
-  description: "Professional grade market analysis terminal",
+  title: "BELLE AGENT | Financial Intelligence",
+  description: "Advanced Mecha-Quant Trading Interface",
   icons: {
-    icon: "/logo.jpeg",
+    icon: "/logo.jpeg", // Pastikan mengganti ini nanti dengan icon wajah karakter jika ada
   },
 };
 
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${shareTechMono.variable} font-mono antialiased bg-black text-white min-h-screen`}>
+      <body className={`${shareTechMono.variable} font-mono antialiased bg-black text-white min-h-screen selection:bg-amber-500 selection:text-black`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

@@ -48,7 +48,7 @@
 }
 
 :root {
-  /* Keep default theme just in case, but Dark Mode is where the magic happens */
+  /* Default Theme (Light) - Adjusted to Gold/Mecha just in case */
   --radius: 0.25rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -56,7 +56,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.70 0.18 75); /* Gold */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -67,8 +67,8 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
+  --ring: oklch(0.70 0.18 75);
+  --chart-1: oklch(0.70 0.18 75); /* Gold */
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
@@ -80,55 +80,59 @@
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: oklch(0.70 0.18 75);
 }
 
 .dark {
-  /* PITCH BLACK BACKGROUND for High Contrast */
-  --background: oklch(0 0 0); 
-  --foreground: oklch(0.9 0 0); /* Soft white text */
+  /* --- BELLE AGENT MECHA THEME (Gold/Black) --- */
+  
+  /* Deep Matte Black Background */
+  --background: oklch(0.05 0 0); 
+  --foreground: oklch(0.95 0.02 85); /* Warm White */
 
-  /* Surfaces slightly lighter but still very dark */
-  --card: oklch(0.05 0 0);
-  --card-foreground: oklch(0.9 0 0);
-  --popover: oklch(0.05 0 0);
-  --popover-foreground: oklch(0.9 0 0);
+  /* Surfaces: Dark Metal */
+  --card: oklch(0.08 0 0);
+  --card-foreground: oklch(0.95 0.02 85);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.95 0.02 85);
 
-  /* NEON GREEN - The "Helper Bot" Eyes / Profit Color */
-  --primary: oklch(0.75 0.25 145); 
-  --primary-foreground: oklch(0 0 0);
+  /* PRIMARY: MECHA GOLD */
+  /* Replaces the old Neon Green */
+  --primary: oklch(0.82 0.18 85); 
+  --primary-foreground: oklch(0.1 0.05 85); /* Dark Text on Gold Button */
 
-  /* VIBRANT RED - The "Crab" Color / Downturn */
-  --secondary: oklch(0.6 0.25 25);
-  --secondary-foreground: oklch(1 0 0);
+  /* SECONDARY: BURNT ORANGE / DARK BRONZE */
+  /* Used for secondary elements or "Sell" buttons if not destructive */
+  --secondary: oklch(0.45 0.15 50);
+  --secondary-foreground: oklch(0.95 0.05 85);
 
   /* UI Elements */
   --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.15 0 0);
-  --accent-foreground: oklch(0.9 0 0);
-  --destructive: oklch(0.6 0.25 25);
+  --muted-foreground: oklch(0.6 0 85);
+  --accent: oklch(0.20 0.05 85); /* Slight Gold Tint on Hover */
+  --accent-foreground: oklch(0.95 0.18 85);
+  --destructive: oklch(0.6 0.25 25); /* Keep Red for Danger/Stop Loss */
   
-  /* Borders - Sharp and distinct */
-  --border: oklch(0.2 0 0);
-  --input: oklch(0.2 0 0);
-  --ring: oklch(0.75 0.25 145); /* Focus ring is neon green */
+  /* Borders - Gold/Bronze Tint */
+  --border: oklch(0.2 0.02 85);
+  --input: oklch(0.15 0.02 85);
+  --ring: oklch(0.82 0.18 85); /* Focus ring is Gold */
 
   /* Charts */
-  --chart-1: oklch(0.75 0.25 145); /* Green */
-  --chart-2: oklch(0.6 0.25 25);   /* Red */
-  --chart-3: oklch(0.5 0.2 250);
-  --chart-4: oklch(0.9 0.1 145);
-  --chart-5: oklch(0.7 0.2 30);
+  --chart-1: oklch(0.82 0.18 85); /* Gold (Profit/Main) */
+  --chart-2: oklch(0.6 0.25 25);   /* Red (Loss) */
+  --chart-3: oklch(0.75 0.15 55);  /* Orange */
+  --chart-4: oklch(0.9 0.05 85);   /* Pale Gold */
+  --chart-5: oklch(0.5 0.1 85);    /* Dark Gold */
   
-  --sidebar: oklch(0.05 0 0);
-  --sidebar-foreground: oklch(0.9 0 0);
-  --sidebar-primary: oklch(0.75 0.25 145);
-  --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
-  --sidebar-accent-foreground: oklch(0.9 0 0);
-  --sidebar-border: oklch(0.2 0 0);
-  --sidebar-ring: oklch(0.75 0.25 145);
+  --sidebar: oklch(0.02 0 0);
+  --sidebar-foreground: oklch(0.9 0 85);
+  --sidebar-primary: oklch(0.82 0.18 85);
+  --sidebar-primary-foreground: oklch(0.1 0.05 85);
+  --sidebar-accent: oklch(0.15 0.05 85);
+  --sidebar-accent-foreground: oklch(0.95 0.18 85);
+  --sidebar-border: oklch(0.2 0.02 85);
+  --sidebar-ring: oklch(0.82 0.18 85);
 }
 
 @layer base {
@@ -141,18 +145,23 @@
 }
 
 @layer utilities {
-  /* helper bot glow effects */
+  /* --- MECHA GLOW EFFECTS (Renamed internally to Gold, class names kept for compatibility) --- */
+  
+  /* Originally .bot-glow-green -> Now Golden Glow */
   .bot-glow-green {
-    box-shadow: 0 0 10px oklch(0.75 0.25 145 / 0.5), inset 0 0 5px oklch(0.75 0.25 145 / 0.2);
-    border: 1px solid oklch(0.75 0.25 145);
-  }
-  .bot-text-glow {
-    text-shadow: 0 0 5px oklch(0.75 0.25 145 / 0.8);
+    box-shadow: 0 0 15px oklch(0.82 0.18 85 / 0.4), inset 0 0 5px oklch(0.82 0.18 85 / 0.1);
+    border: 1px solid oklch(0.82 0.18 85 / 0.6);
   }
   
+  /* Text Glow - Gold */
+  .bot-text-glow {
+    text-shadow: 0 0 8px oklch(0.82 0.18 85 / 0.6);
+  }
+  
+  /* Visor/Scanner Effect - Changed from Green/White to Gold/Orange */
   .bot-visor {
-    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
-    border-top: 2px solid #333;
+    background: linear-gradient(180deg, #1a1500 0%, #000000 100%); /* Dark Gold tint */
+    border-top: 2px solid #332200;
     position: relative;
     overflow: hidden;
   }
@@ -160,7 +169,8 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+    /* Scanning beam is now Amber */
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0) 0%, rgba(255, 215, 0, 0.2) 50%, rgba(255, 215, 0, 0) 100%);
     animation: scan 3s infinite linear;
     pointer-events: none;
   }
@@ -169,21 +179,22 @@
     100% { transform: translateX(150%); }
   }
 
+  /* Eye/Indicator - Gold */
   .bot-eye {
     width: 6px;
     height: 18px;
-    background-color: oklch(0.75 0.25 145);
-    box-shadow: 0 0 8px oklch(0.75 0.25 145);
+    background-color: oklch(0.82 0.18 85); /* Gold */
+    box-shadow: 0 0 10px oklch(0.82 0.18 85);
     position: relative;
     animation: blink 4s infinite;
   }
-  /* Candlestick shape */
+  /* Candlestick shape - Gold */
   .bot-eye::before {
     content: '';
     position: absolute;
     top: -4px; left: 2px;
     width: 2px; height: 26px;
-    background-color: oklch(0.75 0.25 145);
+    background-color: oklch(0.82 0.18 85);
   }
   
   @keyframes blink {
@@ -191,11 +202,11 @@
     50% { transform: scaleY(0.1); }
   }
 
-  /* Cyberpunk Grid Background */
+  /* Cyberpunk Grid Background - Warm Gold/Bronze tint */
   .cyber-grid {
     background-size: 40px 40px;
     background-image:
-      linear-gradient(to right, rgba(30, 30, 30, 0.5) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(30, 30, 30, 0.5) 1px, transparent 1px);
+      linear-gradient(to right, rgba(100, 80, 0, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100, 80, 0, 0.15) 1px, transparent 1px);
   }
 }

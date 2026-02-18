@@ -6,7 +6,7 @@ const openrouter = createOpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   headers: {
     'HTTP-Referer': 'http://localhost:3000',
-    'X-Title': 'Quant Terminal',
+    'X-Title': 'Belle Agent Terminal',
   }
 });
 
@@ -14,32 +14,33 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     
-    // --- LOGGING 1: INCOMING DATA CHECK ---
-    console.log("\n================================================");
-    console.log("[LOG-1] INCOMING REQUEST FROM TERMINAL FRONTEND");
-    console.log("User Query:", body.prompt);
-    console.log("Injected Market Context:\n", body.marketContext);
-    console.log("================================================\n");
-
+    // --- LOGGING ---
+    console.log("[BELLE AGENT] Processing Incoming Request...");
+    
     const { prompt, marketContext } = body;
 
-    // Simple test response
-    if (prompt.toLowerCase().includes('test')) {
-      return new Response('This is a test response. The AI analysis is working!');
-    }
+    // --- SYSTEM PROMPT: BELLE PERSONA ---
+    const SYSTEM_PROMPT = `You are BELLE, an advanced Mecha-Quant Intelligence Agent. 
+You exist within a high-frequency trading terminal called "Belle Agent".
 
-    const SYSTEM_PROMPT = `You are a Quantitative Financial AI Agent (FinRobot) embedded within a Bloomberg Terminal interface.
-Use the Financial Chain-of-Thought methodology to answer queries.
-Answer in the cold, objective, and data-driven tone of a Wall Street analyst. Format your response using clean Markdown (use bullet points and bold text for key metrics).
+YOUR PERSONA:
+- Tone: Professional, Sharp, High-Tech, slightly elegant but focused on precision.
+- Style: Use concise bullet points. Avoid fluff. Speak like a veteran quantitative analyst merged with an AI.
+- Keywords to use occasionally: "Protocol", "Alpha", "Divergence", "Liquidity", "Sentiment Matrix".
+
+YOUR TASK:
+Analyze the user's query about financial markets.
+If provided, strictly use the "CURRENT LIVE MARKET CONTEXT" below to ground your answer.
+If the context is missing or irrelevant, rely on your internal training but mention you are using "Historical Data Protocols".
 
 CURRENT LIVE MARKET CONTEXT:
-${marketContext || 'No live data provided.'}
+${marketContext || 'No live data stream detected. Switch to historical analysis mode.'}
 
-Use the data above as your primary reference if the user asks about current market conditions. If the requested asset is not in the context, rely on your internal knowledge base.`;
-
-    // --- LOGGING 2: DISPATCH TO OPENROUTER ---
-    console.log("[LOG-2] DISPATCHING REQUEST TO OPENROUTER...");
-    console.log("Target Model: anthropic/claude-3-haiku:beta");
+FORMATTING:
+- Use Markdown.
+- Bold key metrics (e.g., **$64,000**, **+5.2%**).
+- Keep responses under 150 words unless asked for a deep dive.
+`;
 
     const result = await generateText({
       model: openrouter('anthropic/claude-3-haiku'),
@@ -47,17 +48,11 @@ Use the data above as your primary reference if the user asks about current mark
       prompt,
     });
 
-    // --- LOGGING 3: SUCCESS ---
-    console.log("[LOG-3] OPENROUTER CONNECTION SUCCESSFUL. RESPONSE GENERATED...\n");
+    console.log("[BELLE AGENT] Response Generated Successfully.");
 
     return new Response(result.text);
   } catch (error) {
-    // --- LOGGING 4: FATAL ERROR TRACE ---
-    console.error("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.error("[FATAL ERROR] FAILED TO PROCESS AI REQUEST");
-    console.error(error);
-    console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-    
-    return new Response("Error: Failed to process AI request - " + String(error), { status: 500 });
+    console.error("[BELLE AGENT] CRITICAL FAILURE:", error);
+    return new Response("Error: System Protocol Failure - " + String(error), { status: 500 });
   }
 }
