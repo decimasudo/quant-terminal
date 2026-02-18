@@ -61,7 +61,15 @@ export default function LandingPage() {
              </Link>
              <div className="h-4 w-px bg-white/10"></div>
              <a 
-               href="https://github.com/decimasudo/quant-terminal" 
+               href="https://x.com/bellefinanceai" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-zinc-500 hover:text-amber-400 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.3)] p-2 rounded hover:bg-amber-500/10"
+             >
+               <Twitter size={18} />
+             </a>
+             <a 
+               href="https://github.com/decimasudo/belle-terminal" 
                target="_blank" 
                rel="noopener noreferrer"
                className="text-zinc-500 hover:text-amber-400 transition-all hover:shadow-[0_0_10px_rgba(245,158,11,0.3)] p-2 rounded hover:bg-amber-500/10"
@@ -134,7 +142,7 @@ export default function LandingPage() {
            
            <div className="grid grid-cols-12 h-64 md:h-96 gap-1 p-1 bg-black relative">
               {/* Overlay Grid */}
-              <div className="absolute inset-0 bg-[url('/grid.png')] opacity-20 pointer-events-none"></div>
+              <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none"></div>
 
               {/* SIDEBAR MOCK */}
               <div className="col-span-1 hidden md:block bg-zinc-900/30 border-r border-white/5 flex flex-col items-center py-4 gap-4">

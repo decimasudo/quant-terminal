@@ -7,7 +7,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import { Activity, ChevronDown, MessageSquare, Newspaper, Send, Zap, Plus, X, LineChart, Github, Cpu, Radio, Target, Crosshair } from "lucide-react"
+import { Activity, ChevronDown, MessageSquare, Newspaper, Send, Zap, Plus, X, LineChart, Github, Cpu, Radio, Target, Crosshair, Twitter } from "lucide-react"
 import { createChart, ColorType, CrosshairMode, CandlestickSeries, UTCTimestamp } from "lightweight-charts"
 
 const klineCache: Record<string, any[]> = {}
@@ -451,6 +451,26 @@ export default function TerminalPage() {
         </div>
         
         <div className="flex items-center gap-6 mr-4">
+           {/* Social Links */}
+           <div className="flex items-center gap-3">
+             <a 
+               href="https://x.com/bellefinanceai" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="w-8 h-8 rounded-sm border border-amber-500/30 bg-black/50 flex items-center justify-center hover:bg-amber-500/10 hover:border-amber-500/60 transition-all group"
+             >
+               <Twitter size={16} className="text-amber-500/70 group-hover:text-amber-400 transition-colors" />
+             </a>
+             <a 
+               href="https://github.com/decimasudo/belle-terminal" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="w-8 h-8 rounded-sm border border-amber-500/30 bg-black/50 flex items-center justify-center hover:bg-amber-500/10 hover:border-amber-500/60 transition-all group"
+             >
+               <Github size={16} className="text-amber-500/70 group-hover:text-amber-400 transition-colors" />
+             </a>
+           </div>
+           
            {/* Connection HUD */}
            <div className="flex flex-col items-end">
               <span className="text-[9px] text-amber-500/60 uppercase tracking-[0.3em] font-mono">Uplink Status</span>
@@ -483,7 +503,7 @@ export default function TerminalPage() {
               </h1>
               
               <div className="bg-[#050300] border border-amber-500/30 p-12 relative flex flex-col items-center text-center max-w-2xl mx-auto shadow-[0_0_50px_rgba(245,158,11,0.1)] group">
-                 <div className="absolute inset-0 bg-[url('/grid.png')] opacity-10 pointer-events-none"></div>
+                 <div className="absolute inset-0 cyber-grid opacity-10 pointer-events-none"></div>
                  
                  <div className="relative z-10">
                     <div className="text-7xl font-black text-amber-400 mb-4 bot-text-glow tracking-tighter">55</div>
@@ -496,7 +516,7 @@ export default function TerminalPage() {
 
               {/* AI Summary Card */}
               <div className="bg-[#0a0600] border border-amber-500/30 p-6 mt-8 rounded-sm max-w-2xl mx-auto shadow-[0_0_30px_rgba(245,158,11,0.05)] relative">
-                 <div className="absolute inset-0 bg-[url('/grid.png')] opacity-5 pointer-events-none"></div>
+                 <div className="absolute inset-0 cyber-grid opacity-5 pointer-events-none"></div>
                  <div className="relative z-10">
                     <h2 className="text-lg font-black text-amber-500 mb-4 flex items-center gap-2 tracking-wider uppercase">
                        <Zap size={16} className="animate-pulse" /> AI SENTIMENT ANALYSIS
@@ -647,7 +667,7 @@ export default function TerminalPage() {
 
                 <div className="flex-1 relative bg-transparent m-2 overflow-hidden border border-amber-500/10">
                   {/* Subtle Grid behind chart */}
-                  <div className="absolute inset-0 bg-[url('/grid.png')] opacity-5 pointer-events-none z-0"></div>
+                  <div className="absolute inset-0 cyber-grid opacity-5 pointer-events-none z-0"></div>
                   <TradingChart symbol={activeSymbol + "USDT"} timeframe={chartTimeframe} isMock={activeItemData.isMock} />
                 </div>
               </ResizablePanel>
@@ -666,7 +686,7 @@ export default function TerminalPage() {
 
                 <div className="flex-1 p-4 flex flex-col overflow-hidden relative">
                    {/* Background Tech Pattern */}
-                   <div className="absolute inset-0 bg-[url('/grid.png')] opacity-10 pointer-events-none"></div>
+                   <div className="absolute inset-0 cyber-grid opacity-10 pointer-events-none"></div>
 
                    <div className="flex-1 overflow-y-auto no-scrollbar space-y-4 mb-4 flex flex-col relative z-10 pr-2">
                       {chatHistory.map((msg, i) => (

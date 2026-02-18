@@ -50,7 +50,7 @@ export function TerminalSplash({ onComplete }: TerminalSplashProps) {
       <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none"></div>
       
       {/* GOLDEN PARTICLES */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" suppressHydrationWarning>
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
@@ -722,7 +722,7 @@ export default function TerminalPage() {
                   <Zap size={12} className={isAiTyping ? "animate-spin" : ""} /> BELLE INTELLIGENCE
                 </div>
 
-                <div className="flex-1 p-4 flex flex-col overflow-hidden relative bg-[url('/grid.png')]">
+                <div className="flex-1 p-4 flex flex-col overflow-hidden relative cyber-grid">
                    <div className="flex-1 overflow-y-auto no-scrollbar space-y-4 mb-4 flex flex-col">
                       {chatHistory.map((msg, i) => (
                         <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>

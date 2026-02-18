@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "BELLE AGENT | Financial Intelligence",
   description: "Advanced Mecha-Quant Trading Interface",
   icons: {
-    icon: "/logo.jpeg", // Pastikan mengganti ini nanti dengan icon wajah karakter jika ada
+    icon: "/belle-agent.jpeg",
   },
 };
 
