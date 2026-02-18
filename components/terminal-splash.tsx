@@ -92,7 +92,7 @@ export function TerminalSplash({ onComplete }: TerminalSplashProps) {
           
           {/* Main logo container */}
           <div className="w-24 h-24 rounded-full border-2 border-amber-500 p-1 relative z-10 shadow-[0_0_40px_rgba(245,158,11,0.3)] bg-black/50 backdrop-blur-sm">
-            <img src="/logo.jpeg" alt="Belle Agent" className="w-full h-full object-cover rounded-full opacity-90 animate-pulse" />
+            <img src="/belle-agent.jpeg" alt="Belle Agent" className="w-full h-full object-cover rounded-full opacity-90 animate-pulse" />
             
             {/* Inner glow */}
             <div className="absolute inset-0 rounded-full bg-amber-500/10 animate-[breathe_2s_ease-in-out_infinite]"></div>
@@ -160,12 +160,26 @@ export function TerminalSplash({ onComplete }: TerminalSplashProps) {
         </div>
       </div>
 
-      {/* Loading Bar */}
-      <div className="mt-6 w-64 h-1 bg-white/10 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-amber-500 transition-all duration-300 ease-out"
-          style={{ width: `${(currentLine / bootSequence.length) * 100}%` }}
-        ></div>
+      {/* ENHANCED LOADING BAR */}
+      <div className="mt-8 relative z-10">
+        <div className="w-80 h-2 bg-black/50 border border-amber-500/30 rounded-full overflow-hidden shadow-[0_0_20px_rgba(245,158,11,0.1)] backdrop-blur-sm">
+          <div 
+            className="h-full bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-500 ease-out shadow-[0_0_15px_rgba(245,158,11,0.6)]"
+            style={{ width: `${(currentLine / bootSequence.length) * 100}%` }}
+          />
+          {/* Animated shine effect */}
+          <div 
+            className="absolute top-0 h-full w-8 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-[shine_1.5s_ease-in-out_infinite]"
+            style={{ left: `${(currentLine / bootSequence.length) * 100}%` }}
+          />
+        </div>
+        
+        {/* Status text */}
+        <div className="text-center mt-3">
+          <div className="text-amber-500/80 text-xs font-mono tracking-widest animate-pulse">
+            {currentLine < bootSequence.length ? 'BOOTING SYSTEM...' : 'READY FOR LAUNCH'}
+          </div>
+        </div>
       </div>
     </div>
   );
