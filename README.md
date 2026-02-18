@@ -8,7 +8,7 @@
 
 Official Terminal: www.belleagent.site/
 
-CA: 4PCrr3LPWNKEomthsdmcB83Qnh5XroCbwxmJxgN5pump
+CA: [TBD]
 
 Twitter: https://x.com/belleagent
 

@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   description: "Advanced Mecha-Quant Trading Interface",
   icons: {
     icon: "/belle-agent.jpeg",
+    shortcut: "/belle-agent.jpeg",
+    apple: "/belle-agent.jpeg",
   },
 };
 
