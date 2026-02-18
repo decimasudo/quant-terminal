@@ -23,9 +23,9 @@ export function TerminalSplash({ onComplete }: TerminalSplashProps) {
 
   const bootSequence = [
     "BELLE INTELLIGENCE SYSTEM v2.0",
-    "Initializing systems...",
-    "Loading protocols...",
-    "Ready for operation."
+    "Initializing neural networks...",
+    "Loading quantum protocols...",
+    "System online. Welcome aboard."
   ];
 
   useEffect(() => {
@@ -33,46 +33,130 @@ export function TerminalSplash({ onComplete }: TerminalSplashProps) {
       const timer = setTimeout(() => {
         setBootLines(prev => [...prev, bootSequence[currentLine]]);
         setCurrentLine(prev => prev + 1);
-      }, 400);
+      }, 250); // Faster: 250ms instead of 400ms
       return () => clearTimeout(timer);
     } else {
-      // After all lines, wait a bit then complete
+      // Shorter wait time: 500ms instead of 1000ms
       const timer = setTimeout(() => {
         onComplete();
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [currentLine, onComplete]);
 
   return (
-    <div className="fixed inset-0 bg-black flex flex-col items-center justify-center z-50 font-mono text-green-400">
-      {/* Background Grid */}
+    <div className="fixed inset-0 bg-black flex flex-col items-center justify-center z-50 font-mono text-green-400 overflow-hidden">
+      {/* ENHANCED BACKGROUND - GOLD THEME WITH ANIMATIONS */}
       <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none"></div>
       
-      {/* Logo */}
-      <div className="mb-8 relative">
-        <div className="w-20 h-20 rounded-full border-2 border-amber-500 p-1 mb-4 relative z-10 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
-          <img src="/belle-agent.jpeg" alt="Belle" className="w-full h-full object-cover rounded-full opacity-90" />
+      {/* GOLDEN PARTICLES */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-amber-500/60 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${1 + Math.random() * 1}s`
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* SCANNING LINES */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent animate-[scan_2s_ease-in-out_infinite]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-500/30 to-transparent animate-[scan_3s_ease-in-out_infinite_reverse]"></div>
+      </div>
+      
+      {/* RADIAL GLOW */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.05)_0%,transparent_70%)] pointer-events-none"></div>
+      
+      {/* FLOATING GEOMETRIC SHAPES */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-20 w-16 h-16 border border-amber-500/20 rotate-45 animate-[float_4s_ease-in-out_infinite]"></div>
+        <div className="absolute top-40 right-32 w-12 h-12 border border-amber-500/10 rounded-full animate-[float_5s_ease-in-out_infinite_reverse]"></div>
+        <div className="absolute bottom-32 left-1/4 w-8 h-8 bg-amber-500/5 rotate-12 animate-[float_3s_ease-in-out_infinite]"></div>
+        <div className="absolute bottom-20 right-20 w-20 h-20 border border-amber-500/15 rounded-full animate-[float_6s_ease-in-out_infinite]"></div>
+      </div>
+      
+      {/* ENHANCED LOGO WITH MULTIPLE EFFECTS */}
+      <div className="mb-8 relative z-10">
+        <div className="relative">
+          {/* Outer rotating rings */}
+          <div className="absolute inset-0 rounded-full border-2 border-amber-500/20 animate-[spin_8s_linear_infinite]"></div>
+          <div className="absolute inset-2 rounded-full border border-amber-500/10 animate-[spin_12s_linear_infinite_reverse]"></div>
+          <div className="absolute inset-4 rounded-full border border-amber-500/5 animate-[spin_6s_linear_infinite]"></div>
+          
+          {/* Main logo container */}
+          <div className="w-24 h-24 rounded-full border-2 border-amber-500 p-1 relative z-10 shadow-[0_0_40px_rgba(245,158,11,0.3)] bg-black/50 backdrop-blur-sm">
+            <img src="/logo.jpeg" alt="Belle Agent" className="w-full h-full object-cover rounded-full opacity-90 animate-pulse" />
+            
+            {/* Inner glow */}
+            <div className="absolute inset-0 rounded-full bg-amber-500/10 animate-[breathe_2s_ease-in-out_infinite]"></div>
+          </div>
+          
+          {/* Pulsing dots */}
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 rounded-full animate-ping"></div>
+          <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-amber-400 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+          
+          {/* Energy arcs */}
+          <div className="absolute -inset-2 rounded-full border border-amber-500/30 animate-[breathe_3s_ease-in-out_infinite]"></div>
         </div>
-        <div className="absolute inset-0 rounded-full border border-white/5 animate-[spin_10s_linear_infinite]"></div>
+        
+        {/* Status text with glow */}
+        <div className="text-center mt-4">
+          <div className="text-amber-500 font-black text-sm tracking-[0.3em] bot-text-glow animate-pulse">
+            INITIALIZING
+          </div>
+          <div className="text-amber-300/60 text-xs tracking-[0.5em] font-bold mt-1 animate-pulse" style={{animationDelay: '0.3s'}}>
+            NEURAL LINK
+          </div>
+        </div>
       </div>
 
-      {/* Boot Terminal */}
-      <div className="bg-black/80 border border-amber-500/30 p-6 rounded-sm max-w-md w-full">
-        <div className="text-amber-500 font-bold text-xs mb-4 tracking-widest">SYSTEM BOOT SEQUENCE</div>
-        <div className="space-y-2 text-xs">
+      {/* ENHANCED BOOT TERMINAL */}
+      <div className="bg-black/90 border border-amber-500/40 p-6 rounded-sm max-w-lg w-full relative z-10 shadow-[0_0_30px_rgba(245,158,11,0.1)] backdrop-blur-sm">
+        {/* Terminal header with glow */}
+        <div className="text-amber-500 font-black text-sm mb-6 tracking-[0.2em] text-center relative">
+          <span className="bot-text-glow">SYSTEM BOOT SEQUENCE</span>
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-16 h-[1px] bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+        </div>
+        
+        <div className="space-y-3 text-sm">
           {bootLines.map((line, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <span className="text-amber-500">{'>'}</span>
-              <span className="animate-pulse">{line}</span>
+            <div key={index} className="flex items-center gap-3 animate-in fade-in slide-in-from-left-2 duration-300">
+              <span className="text-amber-500 font-bold animate-pulse">{'>'}</span>
+              <span className="text-amber-100 font-mono tracking-wide">{line}</span>
+              <div className="ml-auto w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
             </div>
           ))}
           {currentLine < bootSequence.length && (
-            <div className="flex items-center gap-2">
-              <span className="text-amber-500 animate-pulse">{'>'}</span>
-              <span className="animate-pulse">_</span>
+            <div className="flex items-center gap-3">
+              <span className="text-amber-500 animate-pulse font-bold">{'>'}</span>
+              <span className="text-amber-300 animate-pulse font-mono">_</span>
+              <div className="ml-auto text-xs text-amber-500/60 animate-pulse">processing...</div>
             </div>
           )}
+        </div>
+        
+        {/* Progress indicator */}
+        <div className="mt-6 flex items-center justify-center gap-2">
+          <div className="text-xs text-amber-500/60 font-mono">
+            {Math.round((currentLine / bootSequence.length) * 100)}%
+          </div>
+          <div className="flex gap-1">
+            {bootSequence.map((_, index) => (
+              <div
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index < currentLine ? 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'bg-amber-500/20'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
