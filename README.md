@@ -1,4 +1,4 @@
-# CLAW FINANCIAL AGENT
+# BELLE AGENT
 
 > **Advanced AI-Powered Quantitative Market Telemetry**
 
@@ -6,15 +6,15 @@
 [![Core](https://img.shields.io/badge/Finch_Engine-ONLINE-red?style=for-the-badge)]()
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-Official Terminal: www.clawfinancialagent.site/
+Official Terminal: www.belleagent.site/
 
 CA: 4PCrr3LPWNKEomthsdmcB83Qnh5XroCbwxmJxgN5pump
 
-Twitter: https://x.com/clawfinancialai
+Twitter: https://x.com/belleagent
 
 ## 📡 The Transmission
 
-CLAW FINANCIAL AGENT is a high-frequency interface designed for the intersection of human intuition and machine intelligence. It aggregates the noise of global markets into a single, high-fidelity stream of actionable data.
+BELLE AGENT is a high-frequency interface designed for the intersection of human intuition and machine intelligence. It aggregates the noise of global markets into a single, high-fidelity stream of actionable data.
 
 We don't just track prices. We map the psychological matrix of the market through real-time sentiment analysis and proprietary simulation engines.
 
@@ -45,5 +45,5 @@ Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of co
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <div align="center">
-  <sub>CLAW FINANCIAL AGENT © 2026 • Synchronizing with the Global Tape</sub>
+  <sub>BELLE AGENT © 2026 • Synchronizing with the Global Tape</sub>
 </div>
