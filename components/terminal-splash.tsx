@@ -9,7 +9,83 @@ import {
 } from "@/components/ui/resizable"
 import { Activity, ChevronDown, MessageSquare, Newspaper, Send, Zap, Plus, X, LineChart, Github, Cpu, Radio } from "lucide-react"
 import { createChart, ColorType, CrosshairMode, CandlestickSeries, UTCTimestamp } from "lightweight-charts"
-import { TerminalSplash } from "@/components/terminal-splash" // Pastikan import ini ada
+
+// ==========================================
+// TERMINAL SPLASH COMPONENT
+// ==========================================
+interface TerminalSplashProps {
+  onComplete: () => void;
+}
+
+export function TerminalSplash({ onComplete }: TerminalSplashProps) {
+  const [bootLines, setBootLines] = useState<string[]>([]);
+  const [currentLine, setCurrentLine] = useState(0);
+
+  const bootSequence = [
+    "BELLE INTELLIGENCE SYSTEM v2.0",
+    "Initializing systems...",
+    "Loading protocols...",
+    "Ready for operation."
+  ];
+
+  useEffect(() => {
+    if (currentLine < bootSequence.length) {
+      const timer = setTimeout(() => {
+        setBootLines(prev => [...prev, bootSequence[currentLine]]);
+        setCurrentLine(prev => prev + 1);
+      }, 400);
+      return () => clearTimeout(timer);
+    } else {
+      // After all lines, wait a bit then complete
+      const timer = setTimeout(() => {
+        onComplete();
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentLine, onComplete]);
+
+  return (
+    <div className="fixed inset-0 bg-black flex flex-col items-center justify-center z-50 font-mono text-green-400">
+      {/* Background Grid */}
+      <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none"></div>
+      
+      {/* Logo */}
+      <div className="mb-8 relative">
+        <div className="w-20 h-20 rounded-full border-2 border-amber-500 p-1 mb-4 relative z-10 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+          <img src="/belle-agent.jpeg" alt="Belle" className="w-full h-full object-cover rounded-full opacity-90" />
+        </div>
+        <div className="absolute inset-0 rounded-full border border-white/5 animate-[spin_10s_linear_infinite]"></div>
+      </div>
+
+      {/* Boot Terminal */}
+      <div className="bg-black/80 border border-amber-500/30 p-6 rounded-sm max-w-md w-full">
+        <div className="text-amber-500 font-bold text-xs mb-4 tracking-widest">SYSTEM BOOT SEQUENCE</div>
+        <div className="space-y-2 text-xs">
+          {bootLines.map((line, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <span className="text-amber-500">{'>'}</span>
+              <span className="animate-pulse">{line}</span>
+            </div>
+          ))}
+          {currentLine < bootSequence.length && (
+            <div className="flex items-center gap-2">
+              <span className="text-amber-500 animate-pulse">{'>'}</span>
+              <span className="animate-pulse">_</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Loading Bar */}
+      <div className="mt-6 w-64 h-1 bg-white/10 rounded-full overflow-hidden">
+        <div 
+          className="h-full bg-amber-500 transition-all duration-300 ease-out"
+          style={{ width: `${(currentLine / bootSequence.length) * 100}%` }}
+        ></div>
+      </div>
+    </div>
+  );
+}
 
 const klineCache: Record<string, any[]> = {}
 
@@ -46,10 +122,10 @@ function TradingChart({ symbol, timeframe, isMock }: { symbol: string, timeframe
 
     const candlestickSeries = chart.addSeries(CandlestickSeries, {
       upColor: '#f59e0b', // EMAS (Bukan Hijau lagi)
-      downColor: '#78350f', // Merah Tua/Kecoklatan (Amber-900) agar aesthetic
+      downColor: '#ffffff', // Putih untuk down candles
       borderVisible: false, 
       wickUpColor: '#f59e0b', 
-      wickDownColor: '#78350f'
+      wickDownColor: '#ffffff'
     })
 
     const cacheKey = `${symbol}-${timeframe}`
@@ -159,9 +235,6 @@ function TradingChart({ symbol, timeframe, isMock }: { symbol: string, timeframe
 // 2. MAIN PAGE COMPONENT (REBRANDED)
 // ==========================================
 export default function TerminalPage() {
-  // STATE UNTUK SPLASH SCREEN
-  const [showSplash, setShowSplash] = useState(true);
-
   const [mainMenu, setMainMenu] = useState("trading")
   const [activeSymbol, setActiveSymbol] = useState("BTC") 
   const [chartTimeframe, setChartTimeframe] = useState("1h")
@@ -190,7 +263,7 @@ export default function TerminalPage() {
 
     setIsFngLoading(true);
     try {
-      const prompt = "Generate a professional Daily Sentiment Summary..."; // (Prompt logic sama)
+      const prompt = "Generate a professional Daily Sentiment Summary for crypto and equity markets. Return as JSON with keys: intro, crypto_outlook, equity_outlook. Current market context: Crypto Fear: 74, Equity Fear: 35";
       const res = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -355,11 +428,6 @@ export default function TerminalPage() {
   const formatTime = (unixTime: number) => new Date(unixTime * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
   const activeItemData = watchlist.find(w => w.sym === activeSymbol) || watchlist[0];
 
-  // LOGIC TAMPILKAN SPLASH SCREEN
-  if (showSplash) {
-    return <TerminalSplash onComplete={() => setShowSplash(false)} />;
-  }
-
   return (
     <div className="h-screen w-full bg-black text-white font-mono overflow-hidden flex flex-col text-sm leading-tight select-none cyber-grid">
       
@@ -415,11 +483,44 @@ export default function TerminalPage() {
               <h1 className="text-2xl font-black text-white mb-8 flex items-center gap-3 tracking-tighter border-b border-amber-900/30 pb-4">
                 <Activity className="text-amber-500"/> SENTIMENT MATRIX
               </h1>
-              {/* ... (Simpan struktur FNG lama tapi ganti border-orange-500 jadi border-amber-500 dsb) ... */}
               <div className="bg-[#050505] border border-amber-900/30 p-8 relative flex flex-col items-center text-center max-w-2xl mx-auto shadow-[0_0_50px_rgba(245,158,11,0.05)]">
                  <div className="text-4xl font-black text-amber-500 mb-2">55</div>
                  <div className="text-xs tracking-[0.5em] text-gray-400 uppercase">Neutral Sentiment</div>
               </div>
+
+              {/* AI Analysis Card */}
+              {isFngLoading ? (
+                <div className="mt-6 text-center text-amber-500 animate-pulse">Analyzing market sentiment...</div>
+              ) : fngSummary ? (
+                <div className="bg-[#0a0a0a] border border-amber-900/30 p-6 mt-6 rounded-sm max-w-2xl mx-auto shadow-[0_0_30px_rgba(245,158,11,0.03)]">
+                  <h2 className="text-lg font-black text-amber-500 mb-4 flex items-center gap-2">
+                    <Zap size={16} /> AI MARKET ANALYSIS
+                  </h2>
+                  <p className="text-gray-300 mb-4 leading-relaxed">{fngSummary.intro}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-[#050505] p-4 rounded border border-amber-900/20">
+                      <h3 className="text-amber-400 font-semibold mb-2 text-sm tracking-wider">CRYPTO OUTLOOK</h3>
+                      <p className="text-sm text-gray-300">{fngSummary.crypto_outlook}</p>
+                    </div>
+                    <div className="bg-[#050505] p-4 rounded border border-amber-900/20">
+                      <h3 className="text-amber-400 font-semibold mb-2 text-sm tracking-wider">EQUITY OUTLOOK</h3>
+                      <p className="text-sm text-gray-300">{fngSummary.equity_outlook}</p>
+                    </div>
+                  </div>
+
+                  {/* AI Summary Section */}
+                  <div className="mt-6 pt-4 border-t border-amber-900/20">
+                    <h3 className="text-amber-400 font-bold mb-3 text-sm tracking-wider uppercase">AI SUMMARY</h3>
+                    <div className="bg-[#050505] p-4 rounded border border-amber-900/20">
+                      <p className="text-sm text-gray-300 leading-relaxed">
+                        Based on current market sentiment analysis, the **neutral fear index** indicates balanced market psychology. 
+                        **Crypto sectors** show accumulation patterns with potential for upward momentum, while **equity markets** 
+                        await key liquidity signals. Risk protocols should be maintained with focus on gold-standard assets.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
            </div>
         </div>
       ) : mainMenu === 'news' ? (
@@ -454,10 +555,10 @@ export default function TerminalPage() {
                <span className={`text-3xl font-black tracking-tighter ${topTicker.isUp ? 'text-amber-500 bot-text-glow' : 'text-red-500'}`}>${topTicker.price}</span>
             </div>
 
-            <div className="flex flex-col w-[120px]">
+            <div className="flex flex-col w-[100px]">
               <span className="text-[10px] text-gray-500 tracking-widest mb-1">24H CHANGE</span>
-              <span className={`font-bold text-lg ${topTicker.isUp ? 'text-amber-500' : 'text-red-500'}`}>
-                {topTicker.isUp ? '+' : ''}{topTicker.chgAmt} <span className="text-sm opacity-70">({topTicker.chgPct})</span>
+              <span className={`font-bold text-base ${topTicker.isUp ? 'text-amber-500' : 'text-red-500'}`}>
+                {topTicker.isUp ? '+' : ''}{topTicker.chgAmt} <span className="text-xs opacity-70">({topTicker.chgPct})</span>
               </span>
             </div>
 
@@ -528,7 +629,14 @@ export default function TerminalPage() {
                       {chatHistory.map((msg, i) => (
                         <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
                           <div className={`p-3 rounded-sm text-xs leading-relaxed max-w-[90%] border shadow-lg ${msg.role === 'user' ? 'bg-[#111] text-amber-500 border-amber-900/30' : 'bg-[#0a0a0a] text-gray-300 border-white/10'}`}>
-                              <span className="font-mono">{msg.content}</span>
+                              {msg.role === 'ai' ? (
+                                <ReactMarkdown components={{
+                                  strong: ({children}) => <strong className="font-bold text-amber-300">{children}</strong>,
+                                  em: ({children}) => <em className="italic text-amber-200">{children}</em>
+                                }}>{msg.content}</ReactMarkdown>
+                              ) : (
+                                <span className="font-mono">{msg.content}</span>
+                              )}
                           </div>
                         </div>
                       ))}
